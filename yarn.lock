@@ -7724,7 +7724,7 @@
     "object-assign" "^4.1.1"
     "prop-types" "^15.6.2"
 
-"reactstrap@5.0.0":
+"reactstrap@^5.0.0":
   "integrity" "sha512-y0eju/LAK7gbEaTFfq2iW92MF7/5Qh0tc1LgYr2mg92IX8NodGc03a+I+cp7bJ0VXHAiLy0bFL9UP89oSm4cBg=="
   "resolved" "https://registry.npmjs.org/reactstrap/-/reactstrap-5.0.0.tgz"
   "version" "5.0.0"
