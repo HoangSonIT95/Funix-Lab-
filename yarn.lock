@@ -7600,8 +7600,8 @@
     "popper.js" "^1.12.9"
     "prop-types" "^15.6.0"
 
-"react-popper@0.9.2":
-  "integrity" "sha1-J6GY5CHkXlMmFzTcooxuV90sFgQ="
+"react-popper@^0.9.2":
+  "integrity" "sha512-Ws/IFoWoiuhUoBUYzi1AsrgBGWv23/ypSnn0roLQIaG4dx0AsubdZ76SVDRewQOF4rOozSorx7r7+HfhzvZuGQ=="
   "resolved" "https://registry.npmjs.org/react-popper/-/react-popper-0.9.2.tgz"
   "version" "0.9.2"
   dependencies:
