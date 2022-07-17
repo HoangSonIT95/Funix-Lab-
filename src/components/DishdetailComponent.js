@@ -30,10 +30,10 @@ export default class DishDetail extends Component {
     if (dish != null) {
       const comment = dish.comments.map(comment => {
         return (
-          <div>
+          <div className='m-2'>
             <CardText>{comment.comment}</CardText>
             <CardText>
-              -- {comment.author}, {dateFormat(comment.date, 'mm/dd/yyyy')}
+              -- {comment.author}, {dateFormat(comment.date, 'mmm dd, yyyy')}
             </CardText>
           </div>
         );
