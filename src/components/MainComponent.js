@@ -35,6 +35,7 @@ class Main extends Component {
     };
 
     const DishWithId = ({ match }) => {
+      console.log(match);
       return (
         <DishDetail
           dish={
