@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Card, CardImg, CardTitle, CardBody, CardText } from 'reactstrap';
+import 'bootstrap/dist/css/bootstrap.css';
 import dateFormat from 'dateformat';
 
 class RenderStaff extends Component {
@@ -13,6 +14,7 @@ class RenderStaff extends Component {
       return (
         <div className='row'>
           <Card>
+            <button type='button' class='btn-close' aria-label='Close'></button>
             <CardImg src={this.props.staff.image} alt={this.props.staff.name} />
             <CardBody>
               <CardTitle>Họ và tên: {this.props.staff.name}</CardTitle>
