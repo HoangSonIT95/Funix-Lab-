@@ -1,5 +1,6 @@
 import React from 'react';
 import { Card, CardImg, CardTitle, CardBody } from 'reactstrap';
+import RenderStaff from './StaffDetail';
 class StaffList extends React.Component {
   constructor(props) {
     super(props);
@@ -37,6 +38,7 @@ class StaffList extends React.Component {
           <h5>Bấm vào ảnh hoặc tên nhân viên để xem thông tin</h5>
         </div>
         <div className='row'>{staffList}</div>
+        <RenderStaff staff={this.state.staffSelected} />
       </div>
     );
   }
