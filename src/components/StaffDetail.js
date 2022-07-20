@@ -35,7 +35,7 @@ const RenderStaff = props => {
       <Card className='m-2'>
         <button
           type='button'
-          class='close'
+          className='close m-2'
           aria-label='Close'
           onClick={() => props.handleStaffSelected(null)}
         >
