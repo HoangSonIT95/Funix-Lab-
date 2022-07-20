@@ -18,6 +18,7 @@ class StaffList extends React.Component {
     };
     this.toggle = this.toggle.bind(this);
     this.handleStaffSelected = this.handleStaffSelected.bind(this);
+    this.handleColSelected = this.handleColSelected.bind(this);
   }
 
   handleStaffSelected(staff) {
