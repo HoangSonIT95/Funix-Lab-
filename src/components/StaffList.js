@@ -1,4 +1,5 @@
 import React from 'react';
+import '../App.css';
 import { Card, CardImg, CardTitle, CardBody } from 'reactstrap';
 import {
   ButtonDropdown,
@@ -16,6 +17,7 @@ class StaffList extends React.Component {
       dropdownOpen: false,
     };
     this.toggle = this.toggle.bind(this);
+    this.handleStaffSelected = this.handleStaffSelected.bind(this);
   }
 
   handleStaffSelected(staff) {
@@ -33,7 +35,6 @@ class StaffList extends React.Component {
   }
 
   render() {
-    console.log(this.state.staffSelected);
     const staffList = this.props.staffs.map(staff => {
       return (
         <div key={staff.id} className={this.state.colNumSelected}>
@@ -42,7 +43,7 @@ class StaffList extends React.Component {
               this.handleStaffSelected(staff);
             }}
           >
-            <CardBody className='border border-danger'>
+            <CardBody className='border border-warning'>
               <CardImg src={staff.image} alt={staff.name} />
               <CardTitle className='text-center mt-4'>{staff.name}</CardTitle>
             </CardBody>
@@ -52,39 +53,56 @@ class StaffList extends React.Component {
     });
     return (
       <div className='container'>
-        <div className='row mt-3'>
-          <h5 className='mr-8'>
-            Bấm vào ảnh hoặc tên nhân viên để xem thông tin
-          </h5>
-          <ButtonDropdown isOpen={this.state.dropdownOpen} toggle={this.toggle}>
-            <DropdownToggle caret color='danger'>
-              Kiểu hiển thị
-            </DropdownToggle>
-            <DropdownMenu>
-              <DropdownItem
-                onClick={() => this.handleColSelected('col-lg-2 col-md-5 mt-1')}
-              >
-                6 cột
-              </DropdownItem>
-              <DropdownItem
-                onClick={() => this.handleColSelected('col-lg-3 col-md-5 mt-1')}
-              >
-                4 cột
-              </DropdownItem>
-              <DropdownItem
-                onClick={() => this.handleColSelected('col-lg-4 col-md-5 mt-1')}
-              >
-                3 cột
-              </DropdownItem>
-              <DropdownItem
-                onClick={() => this.handleColSelected('col-lg-5 col-md-5 mt-1')}
-              >
-                2 cột
-              </DropdownItem>
-            </DropdownMenu>
-          </ButtonDropdown>
+        <div className='row mt-3 mb-2'>
+          <div className='col-9'>
+            <h5>Bấm vào ảnh hoặc tên nhân viên để xem thông tin chi tiết</h5>
+          </div>
+          <div className='col-2 '>
+            <ButtonDropdown
+              isOpen={this.state.dropdownOpen}
+              toggle={this.toggle}
+              className='ml-5'
+            >
+              <DropdownToggle caret color='danger'>
+                Kiểu hiển thị
+              </DropdownToggle>
+              <DropdownMenu>
+                <DropdownItem
+                  onClick={() =>
+                    this.handleColSelected('col-lg-2 col-md-5 mt-1')
+                  }
+                >
+                  6 cột
+                </DropdownItem>
+                <DropdownItem
+                  onClick={() =>
+                    this.handleColSelected('col-lg-3 col-md-5 mt-1')
+                  }
+                >
+                  4 cột
+                </DropdownItem>
+                <DropdownItem
+                  onClick={() =>
+                    this.handleColSelected('col-lg-4 col-md-5 mt-1')
+                  }
+                >
+                  3 cột
+                </DropdownItem>
+                <DropdownItem
+                  onClick={() =>
+                    this.handleColSelected('col-lg-5 col-md-5 mt-1')
+                  }
+                >
+                  2 cột
+                </DropdownItem>
+              </DropdownMenu>
+            </ButtonDropdown>
+          </div>
         </div>
-        <RenderStaff staff={this.state.staffSelected} />
+        <RenderStaff
+          staff={this.state.staffSelected}
+          handleStaffSelected={this.handleStaffSelected}
+        />
         <div className='row'>{staffList}</div>
       </div>
     );

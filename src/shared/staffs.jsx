@@ -43,7 +43,7 @@ export const STAFFS = [
   },
   {
     id: 1,
-    name: 'Nguyễn Ngọc Bích Diệp',
+    name: 'Nguyễn Ngọc Bích',
     doB: '2000-01-01T08:59:00.000Z',
     salaryScale: 1.2,
     startDate: '2019-04-30T08:59:00.000Z',
@@ -65,7 +65,7 @@ export const STAFFS = [
   },
   {
     id: 3,
-    name: 'Tô Bảo Vy',
+    name: 'Đặng Lê Bảo Vy',
     doB: '2002-01-01T08:59:00.000Z',
     salaryScale: 1,
     startDate: '2019-04-30T08:59:00.000Z',
@@ -131,7 +131,7 @@ export const STAFFS = [
   },
   {
     id: 9,
-    name: 'Hồ Ngọc Hà',
+    name: 'Hồ Ngọc Hồng Hà',
     doB: '2003-01-01T08:59:00.000Z',
     salaryScale: 1,
     startDate: '2019-04-30T08:59:00.000Z',
@@ -153,7 +153,7 @@ export const STAFFS = [
   },
   {
     id: 11,
-    name: 'Lý Ngọc Hạ',
+    name: 'Lý Ngọc Trâm',
     doB: '2003-01-01T08:59:00.000Z',
     salaryScale: 1,
     startDate: '2019-04-30T08:59:00.000Z',
@@ -164,7 +164,7 @@ export const STAFFS = [
   },
   {
     id: 12,
-    name: 'Hoàng Thượng Anh Minh',
+    name: 'Hoàng Anh Minh',
     doB: '2003-01-01T08:59:00.000Z',
     salaryScale: 1,
     startDate: '2019-04-30T08:59:00.000Z',
