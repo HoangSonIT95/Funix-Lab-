@@ -9,7 +9,7 @@ class StaffList extends React.Component {
   render() {
     const staffList = this.props.staffs.map(staff => {
       return (
-        <div key={staff.id}>
+        <div key={staff.id} className='col-lg-4 col-md-5 mt-1'>
           <Card>
             <CardBody>
               <CardImg src={staff.image} alt={staff.name} />
