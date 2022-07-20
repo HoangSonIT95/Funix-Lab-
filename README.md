@@ -1,1 +1,5 @@
-Sample cho toàn bộ lab và project trong môn học Lập Trình Web Front-End với React với đầy đủ dependency
+Funix - Môn học Lập trình Web Front-End với React
+
+Học viên: Hoàng Văn Sơn sonhvFx16039@funix.edu.vn
+
+Bài ASM 1
