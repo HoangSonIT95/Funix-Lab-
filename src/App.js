@@ -1,13 +1,16 @@
 import React, { Component } from 'react';
 import './App.css';
+import { STAFFS } from './shared/staffs';
+import StaffList from './components/StaffList';
 class App extends Component {
-
+  constructor(props) {
+    super(props);
+    this.state = { staffs: STAFFS };
+  }
   render() {
     return (
-      <div className="App">
-        <p>Sample cho toàn bộ lab và project trong môn học Lập Trình Web Front-End với React với đầy đủ dependency.</p>
-        <p>Phiên bản React hiện tại trên máy của bạn là: {React.version}</p>
-        <p>Phiên bản React đã được sử dụng để thiết kế môn học: 16.14.0.</p>
+      <div className='App'>
+        <StaffList />
       </div>
     );
   }
