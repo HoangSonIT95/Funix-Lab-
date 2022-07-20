@@ -3,14 +3,26 @@ import { Card, CardImg, CardTitle, CardBody } from 'reactstrap';
 class StaffList extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      staffSelected: null,
+    };
+    this.handleStaffSelected = this.handleStaffSelected.bind(this);
+  }
+
+  handleStaffSelected(staff) {
+    this.setState({ staffSelected: staff });
   }
 
   render() {
+    console.log(this.state.staffSelected);
     const staffList = this.props.staffs.map(staff => {
       return (
         <div key={staff.id} className='col-lg-4 col-md-5 mt-1'>
-          <Card>
+          <Card
+            onClick={() => {
+              this.handleStaffSelected(staff);
+            }}
+          >
             <CardBody>
               <CardImg src={staff.image} alt={staff.name} />
               <CardTitle className='text-center mt-4'>{staff.name}</CardTitle>
