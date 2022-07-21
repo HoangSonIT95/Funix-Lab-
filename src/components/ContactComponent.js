@@ -8,7 +8,6 @@ import {
   Label,
   Input,
   Col,
-  Row,
   FormFeedback,
 } from 'reactstrap';
 import { Link } from 'react-router-dom';
@@ -53,7 +52,7 @@ class Contact extends React.Component {
     alert('Current State is: ' + JSON.stringify(this.state));
     event.preventDefault();
   }
-
+  // xu ly khi blur vao input
   handleBlur = field => evt => {
     console.log('field>>', field);
     console.log('evt>> ', evt);
@@ -179,7 +178,7 @@ class Contact extends React.Component {
                     name='firstname'
                     placeholder='First Name'
                     value={this.state.firstname}
-                    valid={errors.firstname === ''}
+                    valid={errors.firstname === ''} // valid vien input mau xanh, invalid mau do
                     invalid={errors.firstname !== ''}
                     onBlur={this.handleBlur('firstname')}
                     onChange={this.handleInputChange}
