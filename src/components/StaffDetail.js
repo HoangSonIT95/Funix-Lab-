@@ -14,7 +14,7 @@ function RenderImg({ staff }) {
 }
 
 //render staff description
-function RenderDetails({ staff }) {
+function RenderDescription({ staff }) {
   return (
     <div className='col-12 col-md-5 m-1'>
       <CardBody>
@@ -46,7 +46,7 @@ const RenderStaff = props => {
         </button>
         <div className='row'>
           <RenderImg staff={props.staff} />
-          <RenderDetails staff={props.staff} />
+          <RenderDescription staff={props.staff} />
         </div>
       </Card>
     );
