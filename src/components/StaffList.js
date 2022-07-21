@@ -1,5 +1,4 @@
 import React from 'react';
-import '../App.css';
 import { Card, CardImg, CardTitle, CardBody } from 'reactstrap';
 import {
   ButtonDropdown,
@@ -13,14 +12,14 @@ class StaffList extends React.Component {
     super(props);
     this.state = {
       staffSelected: null,
-      colNumSelected: 'col-lg-4 col-md-5 mt-1',
+      colNumSelected: 'col-lg-4 col-md-5 mt-1', // set default className for staffList
       dropdownOpen: false,
     };
     this.toggle = this.toggle.bind(this);
     this.handleStaffSelected = this.handleStaffSelected.bind(this);
     this.handleColSelected = this.handleColSelected.bind(this);
   }
-
+  // set staffSelected when select staff
   handleStaffSelected(staff) {
     this.setState({ staffSelected: staff });
   }
@@ -30,13 +29,14 @@ class StaffList extends React.Component {
       dropdownOpen: !this.state.dropdownOpen,
     });
   }
-
+  // set className for staffList when click on dropdown
   handleColSelected(col) {
     this.setState({ colNumSelected: col });
   }
 
   render() {
     const staffList = this.props.staffs.map(staff => {
+      // get staff from props
       return (
         <div key={staff.id} className={this.state.colNumSelected}>
           <Card
@@ -45,6 +45,7 @@ class StaffList extends React.Component {
             }}
           >
             <CardBody className='border border-warning'>
+              {/* render staff img & name */}
               <CardImg src={staff.image} alt={staff.name} />
               <CardTitle className='text-center mt-4'>{staff.name}</CardTitle>
             </CardBody>
@@ -59,6 +60,7 @@ class StaffList extends React.Component {
             <h5>Bấm vào ảnh hoặc tên nhân viên để xem thông tin chi tiết</h5>
           </div>
           <div className='col-2 '>
+            {/* dropdown set className */}
             <ButtonDropdown
               isOpen={this.state.dropdownOpen}
               toggle={this.toggle}
@@ -100,6 +102,7 @@ class StaffList extends React.Component {
             </ButtonDropdown>
           </div>
         </div>
+        {/* goi ham RenderStaff tu StaffDetail component */}
         <RenderStaff
           staff={this.state.staffSelected}
           handleStaffSelected={this.handleStaffSelected}
