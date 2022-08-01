@@ -34,8 +34,21 @@ function RenderSalary(props) {
 }
 
 function Salary(props) {
+  let staffList = props.staffs;
+  const [staffs, setStaffs] = useState({
+    staffs: staffList,
+  });
+  const idDown = () => {
+    staffList.sort(function (a, b) {
+      return b.id - a.id;
+    });
+    setStaffs({
+      staffs: staffList,
+    });
+  };
+
   // map từng props truyền vào hàm RenderSalary để render
-  const staff = props.staffs.map(staff => {
+  const staff = staffs.staffs.map(staff => {
     return <RenderSalary staff={staff} />;
   });
 
@@ -57,7 +70,7 @@ function Salary(props) {
             </DropdownToggle>
             <DropdownMenu>
               <DropdownItem>ID tăng dần</DropdownItem>
-              <DropdownItem>ID giảm dần</DropdownItem>
+              <DropdownItem onClick={idDown}>ID giảm dần</DropdownItem>
               <DropdownItem>Lương tăng dần</DropdownItem>
               <DropdownItem>Lương giảm dần</DropdownItem>
             </DropdownMenu>
