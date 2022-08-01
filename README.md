@@ -1,1 +1,5 @@
-Sample cho toàn bộ lab và project trong môn học Lập Trình Web Front-End với React với đầy đủ dependency
+FUNIX ------- Lập trình Web Frontend với React
+
+Học viên: Hoàng Văn Sơn Fx16039
+Email: sonhvfx16039@funix.edu.vn
+SDT: 0378 126 162
