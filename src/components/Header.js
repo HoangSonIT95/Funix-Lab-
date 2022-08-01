@@ -3,11 +3,14 @@ import {
   Navbar,
   NavbarBrand,
   Nav,
-  NavLink,
   NavbarToggler,
   Collapse,
   NavItem,
+  InputGroup,
+  Input,
+  Button,
 } from 'reactstrap';
+import { NavLink } from 'react-router-dom';
 
 class Header extends React.Component {
   constructor(props) {
@@ -24,6 +27,7 @@ class Header extends React.Component {
   }
 
   render() {
+    console.log(this.props.params);
     return (
       <Navbar dark color='success' expand='md'>
         <div className='container'>
