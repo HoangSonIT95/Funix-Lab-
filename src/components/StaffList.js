@@ -25,6 +25,7 @@ function RenderStaff({ staff }) {
 }
 
 function StaffList(props) {
+  // map từng phần tử từ props để render
   const staffList = props.staffs.map(staff => {
     return (
       <div key={staff.id} className='col-lg-2 col-md-4 col-sm-6'>
