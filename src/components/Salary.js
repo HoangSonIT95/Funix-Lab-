@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   Card,
   CardText,
@@ -6,6 +6,10 @@ import {
   CardTitle,
   Breadcrumb,
   BreadcrumbItem,
+  DropdownToggle,
+  DropdownMenu,
+  DropdownItem,
+  UncontrolledDropdown,
 } from 'reactstrap';
 import { Link } from 'react-router-dom';
 
@@ -45,6 +49,19 @@ function Salary(props) {
             </BreadcrumbItem>
             <BreadcrumbItem active>Bảng Lương</BreadcrumbItem>
           </Breadcrumb>
+        </div>
+        <div className='ml-5 col-3'>
+          <UncontrolledDropdown className='ml-5' direction='down'>
+            <DropdownToggle caret color='primary'>
+              Sắp Xếp
+            </DropdownToggle>
+            <DropdownMenu>
+              <DropdownItem>ID tăng dần</DropdownItem>
+              <DropdownItem>ID giảm dần</DropdownItem>
+              <DropdownItem>Lương tăng dần</DropdownItem>
+              <DropdownItem>Lương giảm dần</DropdownItem>
+            </DropdownMenu>
+          </UncontrolledDropdown>
         </div>
       </div>
       <div className='row'>{staff}</div>
