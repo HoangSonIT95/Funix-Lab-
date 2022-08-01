@@ -6,9 +6,6 @@ import {
   NavbarToggler,
   Collapse,
   NavItem,
-  InputGroup,
-  Input,
-  Button,
 } from 'reactstrap';
 import { NavLink } from 'react-router-dom';
 
@@ -27,7 +24,6 @@ class Header extends React.Component {
   }
 
   render() {
-    console.log(this.props.params);
     return (
       <Navbar dark color='success' expand='md'>
         <div className='container'>
@@ -43,17 +39,17 @@ class Header extends React.Component {
           <Collapse isOpen={this.state.isNavOpen} navbar>
             <Nav navbar>
               <NavItem>
-                <NavLink className='nav-link' to='/nhanvien'>
+                <NavLink className='nav-link mr-2' to='/nhanvien'>
                   <span className='fa fa-users fa-lg'></span> Nhân Viên
                 </NavLink>
               </NavItem>
               <NavItem>
-                <NavLink className='nav-link' to='/phongban'>
+                <NavLink className='nav-link mr-2' to='/phongban'>
                   <span className='fa fa-id-card fa-lg'></span> Phòng Ban
                 </NavLink>
               </NavItem>
               <NavItem>
-                <NavLink className='nav-link' to='/bangluong'>
+                <NavLink className='nav-link mr-2' to='/bangluong'>
                   <span className='fa fa-money fa-lg'></span> Bảng Lương
                 </NavLink>
               </NavItem>
