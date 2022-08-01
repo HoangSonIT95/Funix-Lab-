@@ -24,7 +24,6 @@ class Header extends React.Component {
   }
 
   render() {
-    console.log(this.props.params);
     return (
       <Navbar dark color='success' expand='md'>
         <div className='container'>
