@@ -10,6 +10,8 @@ import {
   DropdownMenu,
   DropdownItem,
   UncontrolledDropdown,
+  ButtonGroup,
+  Button,
 } from 'reactstrap';
 import { Link } from 'react-router-dom';
 
@@ -88,15 +90,16 @@ function Salary(props) {
   return (
     <div className='container'>
       <div className='row mt-2'>
-        <div className='col-8'>
-          <Breadcrumb style={{ marginRight: '70%' }}>
+        <div className='col-lg-7 col-md-6 col-sm-6'>
+          <Breadcrumb>
             <BreadcrumbItem>
               <Link to='/nhanvien'>Nhân Viên</Link>
             </BreadcrumbItem>
             <BreadcrumbItem active>Bảng Lương</BreadcrumbItem>
           </Breadcrumb>
         </div>
-        <div className='ml-5 col-3'>
+
+        <div className='col-lg-3 col-md-4 col-sm-6'>
           <UncontrolledDropdown className='ml-5' direction='down'>
             <DropdownToggle caret color='primary'>
               Sắp Xếp

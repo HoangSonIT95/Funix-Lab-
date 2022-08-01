@@ -5,7 +5,7 @@ function Footer() {
     <div className='footer mt-1'>
       <div className='container'>
         <div className='row justify-content-center'>
-          <div className='col-6 col-sm-5'>
+          <div className='col-lg-6 col-md-6 col-sm-12'>
             <h5>Thông Tin Liên Hệ</h5>
             <address>
               Số nhà 24/1, Đường 17, Khu phố 5, Phường Linh Trung
@@ -19,7 +19,7 @@ function Footer() {
               </a>
             </address>
           </div>
-          <div className='col-6 col-sm-4 align-self-center'>
+          <div className='col-lg-6 col-md-6 col-sm-12 align-self-center'>
             <div className='text-center'>
               <a
                 className='btn btn-social-icon btn-google m-2'

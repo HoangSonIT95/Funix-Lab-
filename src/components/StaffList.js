@@ -4,10 +4,10 @@ import {
   CardImg,
   CardTitle,
   CardBody,
-  Breadcrumb,
   InputGroup,
   Input,
   Button,
+  Breadcrumb,
 } from 'reactstrap';
 import { Link } from 'react-router-dom';
 
@@ -17,7 +17,7 @@ function RenderStaff({ staff }) {
       <Link to={`/nhanvien/${staff.id}`}>
         <CardBody className='border border-warning'>
           <CardImg src={staff.image} alt={staff.name} />
-          <CardTitle className='text-center mt-4'>{staff.name}</CardTitle>
+          <CardTitle className='text-center mt-3'>{staff.name}</CardTitle>
         </CardBody>
       </Link>
     </Card>
@@ -44,21 +44,22 @@ function StaffList(props) {
     })
     .map(staff => {
       return (
-        <div key={staff.id} className='col-lg-2 col-md-4 col-sm-6'>
+        <div key={staff.id} className='col-lg-2 col-md-4 col-6'>
           <RenderStaff staff={staff} />
         </div>
       );
     });
 
   return (
-    <div className='container'>
-      <div className='row mt-2 '>
-        <div className='col-7'>
-          <Breadcrumb style={{ marginRight: '65%' }}>
-            <h5 className='center-text'>Danh sách nhân viên</h5>
+    <div className='container mt-2'>
+      <div className='row mt-2'>
+        <div className='col-lg-7 col-md-6 col-sm-6'>
+          <Breadcrumb>
+            <h6>Danh Sách Nhân Viên</h6>
           </Breadcrumb>
         </div>
-        <div className='ml-5 col-3 mt-2'>
+
+        <div className='col-lg-4 col-md-6 col-sm-6'>
           <InputGroup type='submit'>
             <Input
               placeholder='Tìm nhân viên'
