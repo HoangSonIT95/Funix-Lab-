@@ -5,6 +5,7 @@ import Header from './Header';
 import Footer from './Footer';
 import StaffList from './StaffList';
 import StaffDetail from './StaffDetail';
+import Dept from './Dept';
 
 function Main() {
   // lấy dữ liệu làm state
@@ -34,6 +35,7 @@ function Main() {
           component={() => <StaffList staffs={staff.staffs} />}
         />
         <Route path='/nhanvien/:id' component={StaffWithId} />
+        <Route path='/phongban' component={() => <Dept dept={staff.dept} />} />
         <Redirect to='/nhanvien' />
       </Switch>
       <Footer />
