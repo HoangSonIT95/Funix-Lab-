@@ -34,7 +34,6 @@ function RenderSalary(props) {
 }
 
 function Salary(props) {
-  
   let staffList = props.staffs;
 
   const [staffs, setStaffs] = useState({
@@ -89,8 +88,8 @@ function Salary(props) {
   return (
     <div className='container'>
       <div className='row mt-2'>
-        <div className='col-7'>
-          <Breadcrumb style={{ marginRight: '65%' }}>
+        <div className='col-8'>
+          <Breadcrumb style={{ marginRight: '70%' }}>
             <BreadcrumbItem>
               <Link to='/nhanvien'>Nhân Viên</Link>
             </BreadcrumbItem>
