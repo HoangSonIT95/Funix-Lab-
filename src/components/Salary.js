@@ -34,13 +34,47 @@ function RenderSalary(props) {
 }
 
 function Salary(props) {
+  
   let staffList = props.staffs;
+
   const [staffs, setStaffs] = useState({
     staffs: staffList,
   });
   const idDown = () => {
     staffList.sort(function (a, b) {
       return b.id - a.id;
+    });
+    setStaffs({
+      staffs: staffList,
+    });
+  };
+  const idUp = () => {
+    staffList.sort(function (a, b) {
+      return a.id - b.id;
+    });
+    setStaffs({
+      staffs: staffList,
+    });
+  };
+
+  const salaryDown = () => {
+    staffList.sort(function (a, b) {
+      return (
+        (b.salaryScale * 3000000 + b.overTime * 200000).toFixed(0) -
+        (a.salaryScale * 3000000 + a.overTime * 200000).toFixed(0)
+      );
+    });
+    setStaffs({
+      staffs: staffList,
+    });
+  };
+
+  const salaryUp = () => {
+    staffList.sort(function (a, b) {
+      return (
+        (a.salaryScale * 3000000 + a.overTime * 200000).toFixed(0) -
+        (b.salaryScale * 3000000 + b.overTime * 200000).toFixed(0)
+      );
     });
     setStaffs({
       staffs: staffList,
@@ -69,10 +103,10 @@ function Salary(props) {
               Sắp Xếp
             </DropdownToggle>
             <DropdownMenu>
-              <DropdownItem>ID tăng dần</DropdownItem>
+              <DropdownItem onClick={idUp}>ID tăng dần</DropdownItem>
               <DropdownItem onClick={idDown}>ID giảm dần</DropdownItem>
-              <DropdownItem>Lương tăng dần</DropdownItem>
-              <DropdownItem>Lương giảm dần</DropdownItem>
+              <DropdownItem onClick={salaryUp}>Lương tăng dần</DropdownItem>
+              <DropdownItem onClick={salaryDown}>Lương giảm dần</DropdownItem>
             </DropdownMenu>
           </UncontrolledDropdown>
         </div>
