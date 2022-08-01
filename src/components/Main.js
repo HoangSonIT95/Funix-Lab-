@@ -6,6 +6,7 @@ import Footer from './Footer';
 import StaffList from './StaffList';
 import StaffDetail from './StaffDetail';
 import Dept from './Dept';
+import Salary from './Salary';
 
 function Main() {
   // lấy dữ liệu làm state
@@ -36,6 +37,10 @@ function Main() {
         />
         <Route path='/nhanvien/:id' component={StaffWithId} />
         <Route path='/phongban' component={() => <Dept dept={staff.dept} />} />
+        <Route
+          path='/bangluong'
+          component={() => <Salary staffs={staff.staffs} />}
+        />
         <Redirect to='/nhanvien' />
       </Switch>
       <Footer />
