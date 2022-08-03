@@ -41,6 +41,11 @@ function StaffList(props) {
   const toggleModal = () => {
     setIsModalOpen(!isModalOpen);
   };
+
+  const addStaff = event => {
+    event.preventDefault();
+    toggleModal();
+  };
   // map từng phần tử từ props để render
   const staffList = props.staffs
     .filter(staff => {
@@ -70,7 +75,7 @@ function StaffList(props) {
         <Modal isOpen={isModalOpen} toggle={toggleModal}>
           <ModalHeader>Thêm Nhân Viên Mới</ModalHeader>
           <ModalBody>
-            <Form>
+            <Form onSubmit={addStaff}>
               <FormGroup className='row'>
                 <Label htmlFor='name' className='col-5'>
                   Họ và Tên
@@ -103,12 +108,24 @@ function StaffList(props) {
                 <Label htmlFor='department' className='col-5'>
                   Phòng Ban
                 </Label>
-                <Input
+                <select
                   className='col-6 ml-3'
                   type='department'
                   id='department'
                   name='department'
-                />
+                >
+                  <option>Sale</option>
+                  <option>HR</option>
+                  <option>Marketing</option>
+                  <option>IT</option>
+                  <option>Finance</option>
+                </select>
+                {/* <Input
+                  className='col-6 ml-3'
+                  type='department'
+                  id='department'
+                  name='department'
+                /> */}
               </FormGroup>
               <FormGroup className='row'>
                 <Label htmlFor='salaryScale' className='col-5'>
