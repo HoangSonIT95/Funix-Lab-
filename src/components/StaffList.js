@@ -8,6 +8,12 @@ import {
   Input,
   Button,
   Breadcrumb,
+  Form,
+  Modal,
+  ModalHeader,
+  ModalBody,
+  FormGroup,
+  Label,
 } from 'reactstrap';
 import { Link } from 'react-router-dom';
 
@@ -26,15 +32,10 @@ function RenderStaff({ staff }) {
 
 function StaffList(props) {
   const [keywords, setKeywords] = useState('');
-  const [key, setKey] = useState('');
 
-  const onChangeSearch = value => {
-    setKey(value);
-  };
-
-  const onSearch = () => {
-    setKeywords(key);
-    setKey('');
+  const onSearch = event => {
+    event.preventDefault();
+    setKeywords(event.target.searchName.value);
   };
 
   // map từng phần tử từ props để render
@@ -53,28 +54,30 @@ function StaffList(props) {
   return (
     <div className='container mt-2'>
       <div className='row mt-2'>
-        <div className='col-lg-7 col-md-6 col-sm-6'>
+        <div className='col-lg-5 col-md-4 col-sm-4'>
           <Breadcrumb>
             <h6>Danh Sách Nhân Viên</h6>
           </Breadcrumb>
         </div>
-
-        <div className='col-lg-4 col-md-6 col-sm-6'>
-          <InputGroup type='submit'>
+        <div className='col-lg-3 col-md-4 col-sm-4'>
+          <Button color='primary'>Thêm Nhân Viên</Button>
+        </div>
+        <div className='col-lg-4 col-md-4 col-sm-4'>
+          <Form className='row' type='submit' onSubmit={onSearch}>
             <Input
+              className='col-lg-6 col-md-7 col-sm-6'
               placeholder='Tìm nhân viên'
-              value={key}
-              onChange={e => {
-                onChangeSearch(e.target.value);
-              }}
+              name='searchName'
             />
-            <Button type='submit' color='primary' onClick={onSearch}>
+            <Button
+              className='col-lg-4 col-md-5 col-sm-6'
+              type='submit'
+              color='primary'
+            >
               <i className='fa fa-search' aria-hidden='true'></i>
-              {staffList.length < props.staffs.length && key === ''
-                ? ' Hiện Tất Cả'
-                : ' Tìm Kiếm  '}
+              Tìm Kiếm
             </Button>
-          </InputGroup>
+          </Form>
         </div>
       </div>
       <div className='row'>
@@ -89,5 +92,4 @@ function StaffList(props) {
     </div>
   );
 }
-
 export default StaffList;
