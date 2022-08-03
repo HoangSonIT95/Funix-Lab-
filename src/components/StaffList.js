@@ -32,12 +32,15 @@ function RenderStaff({ staff }) {
 
 function StaffList(props) {
   const [keywords, setKeywords] = useState('');
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const onSearch = event => {
     event.preventDefault();
     setKeywords(event.target.searchName.value);
   };
-
+  const toggleModal = () => {
+    setIsModalOpen(!isModalOpen);
+  };
   // map từng phần tử từ props để render
   const staffList = props.staffs
     .filter(staff => {
@@ -60,8 +63,92 @@ function StaffList(props) {
           </Breadcrumb>
         </div>
         <div className='col-lg-3 col-md-4 col-sm-4'>
-          <Button color='primary'>Thêm Nhân Viên</Button>
+          <Button color='primary' onClick={toggleModal}>
+            Thêm Nhân Viên
+          </Button>
         </div>
+        <Modal isOpen={isModalOpen} toggle={toggleModal}>
+          <ModalHeader>Thêm Nhân Viên Mới</ModalHeader>
+          <ModalBody>
+            <Form>
+              <FormGroup className='row'>
+                <Label htmlFor='name' className='col-5'>
+                  Họ và Tên
+                </Label>
+                <Input
+                  className='col-6 ml-3'
+                  type='text'
+                  id='name'
+                  name='name'
+                />
+              </FormGroup>
+              <FormGroup className='row'>
+                <Label htmlFor='doB' className='col-5'>
+                  Ngày sinh
+                </Label>
+                <Input className='col-6 ml-3' type='date' id='doB' name='doB' />
+              </FormGroup>
+              <FormGroup className='row'>
+                <Label htmlFor='startDate' className='col-5'>
+                  Ngày vào công ty
+                </Label>
+                <Input
+                  className='col-6 ml-3'
+                  type='date'
+                  id='startDate'
+                  name='startDate'
+                />
+              </FormGroup>
+              <FormGroup className='row'>
+                <Label htmlFor='department' className='col-5'>
+                  Phòng Ban
+                </Label>
+                <Input
+                  className='col-6 ml-3'
+                  type='department'
+                  id='department'
+                  name='department'
+                />
+              </FormGroup>
+              <FormGroup className='row'>
+                <Label htmlFor='salaryScale' className='col-5'>
+                  Hệ số lương
+                </Label>
+                <Input
+                  className='col-6 ml-3'
+                  type='salaryScale'
+                  id='salaryScale'
+                  name='salaryScale'
+                />
+              </FormGroup>
+              <FormGroup className='row'>
+                <Label htmlFor='annualLeave' className='col-5'>
+                  Số ngày nghỉ còn lại
+                </Label>
+                <Input
+                  className='col-6 ml-3'
+                  type='annualLeave'
+                  id='annualLeave'
+                  name='annualLeave'
+                />
+              </FormGroup>
+              <FormGroup className='row'>
+                <Label htmlFor='overTime' className='col-5'>
+                  Số ngày làm thêm
+                </Label>
+                <Input
+                  className='col-6 ml-3'
+                  type='overTime'
+                  id='overTime'
+                  name='overTime'
+                />
+              </FormGroup>
+              <Button type='submit' value='submit' color='primary'>
+                Thêm
+              </Button>
+            </Form>
+          </ModalBody>
+        </Modal>
         <div className='col-lg-4 col-md-4 col-sm-4'>
           <Form className='row' type='submit' onSubmit={onSearch}>
             <Input
