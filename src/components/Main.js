@@ -9,21 +9,21 @@ import Dept from './Dept';
 import Salary from './Salary';
 
 function Main() {
-  // lấy dữ liệu làm state
-  const [staff, setStaff] = useState({
-    staffs: STAFFS,
-    dept: DEPARTMENTS,
-  });
-
+  const [staffs, setStaffs] = useState(STAFFS);
+  const [dept, setDept] = useState(DEPARTMENTS);
   // lấy params để truyền vào staffDetail
   const StaffWithId = ({ match }) => {
     return (
       <StaffDetail
-        staffId={staff.staffs.find(
-          nv => nv.id === parseInt(match.params.id, 10)
-        )}
+        staffId={staffs.find(nv => nv.id === parseInt(match.params.id, 10))}
       />
     );
+  };
+
+  const addStaff = staff => {
+    const id = staffs.length;
+    const newStaff = { id, ...staff };
+    setStaffs([...staffs, newStaff]);
   };
 
   return (
@@ -33,14 +33,11 @@ function Main() {
         <Route
           exact
           path='/nhanvien'
-          component={() => <StaffList staffs={staff.staffs} />}
+          component={() => <StaffList onAdd={addStaff} staffs={staffs} />}
         />
         <Route path='/nhanvien/:id' component={StaffWithId} />
-        <Route path='/phongban' component={() => <Dept dept={staff.dept} />} />
-        <Route
-          path='/bangluong'
-          component={() => <Salary staffs={staff.staffs} />}
-        />
+        <Route path='/phongban' component={() => <Dept dept={dept} />} />
+        <Route path='/bangluong' component={() => <Salary staffs={staffs} />} />
         <Redirect to='/nhanvien' />
       </Switch>
       <Footer />

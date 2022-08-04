@@ -10,8 +10,6 @@ import {
   DropdownMenu,
   DropdownItem,
   UncontrolledDropdown,
-  ButtonGroup,
-  Button,
 } from 'reactstrap';
 import { Link } from 'react-router-dom';
 
