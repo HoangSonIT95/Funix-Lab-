@@ -18,6 +18,7 @@ import {
   FormFeedback,
 } from 'reactstrap';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
 
 function RenderStaff({ staff }) {
   return (
@@ -174,6 +175,7 @@ class StaffList extends React.Component {
       });
 
   render() {
+    console.log(this.props);
     const errors = this.validate(
       this.state.name,
       this.state.doB,
@@ -370,4 +372,5 @@ class StaffList extends React.Component {
     );
   }
 }
+
 export default StaffList;
