@@ -8,8 +8,10 @@ import {
   CardTitle,
   Breadcrumb,
   BreadcrumbItem,
+  Button,
 } from 'reactstrap';
 import { Link } from 'react-router-dom';
+import CommentForm from './CommentForm';
 
 function RenderDish({ dish }) {
   if (dish != null) {
@@ -49,6 +51,9 @@ function RenderComments({ comments }) {
             );
           })}
         </ul>
+        <Button className='btn btn-primary'>
+          <i className='fa fa-pencil'></i> Submit Comment
+        </Button>
       </div>
     );
   }
