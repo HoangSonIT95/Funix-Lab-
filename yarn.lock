@@ -8421,6 +8421,11 @@
   "resolved" "https://registry.npmjs.org/signal-exit/-/signal-exit-3.0.3.tgz"
   "version" "3.0.3"
 
+"simple-react-validator@^1.6.1":
+  "integrity" "sha512-jguG7UlulRRBPZEyRroShUpRpV9cC5VjA4WnVGRzZgjqbQGr/twq4LLjqxt5QiSnJZE415gnbXH4oqWR2Ggmaw=="
+  "resolved" "https://registry.npmjs.org/simple-react-validator/-/simple-react-validator-1.6.1.tgz"
+  "version" "1.6.1"
+
 "slash@^1.0.0":
   "integrity" "sha1-xB8vbDn8FtHNF61LXYlhFK5HDVU="
   "resolved" "https://registry.npmjs.org/slash/-/slash-1.0.0.tgz"
