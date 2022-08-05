@@ -11,24 +11,22 @@ import Salary from './Salary';
 import { connect } from 'react-redux';
 
 function Main(props) {
-  /* const [staffs, setStaffs] = useState(STAFFS);
-  const [dept, setDept] = useState(DEPARTMENTS); */
+  const [staffs, setStaffs] = useState(props.staffs);
+  const [dept, setDept] = useState(props.dept);
   // lấy params để truyền vào staffDetail
   const StaffWithId = ({ match }) => {
     return (
       <StaffDetail
-        staffId={props.staffs.find(
-          nv => nv.id === parseInt(match.params.id, 10)
-        )}
+        staffId={staffs.find(nv => nv.id === parseInt(match.params.id, 10))}
       />
     );
   };
 
-  /* const addStaff = staff => {
+  const addStaff = staff => {
     const id = staffs.length;
     const newStaff = { id, ...staff };
     setStaffs([...staffs, newStaff]);
-  }; */
+  };
 
   return (
     <div>
@@ -37,14 +35,11 @@ function Main(props) {
         <Route
           exact
           path='/nhanvien'
-          component={() => <StaffList staffs={props.staffs} />}
+          component={() => <StaffList onAdd={addStaff} staffs={staffs} />}
         />
         <Route path='/nhanvien/:id' component={StaffWithId} />
-        <Route path='/phongban' component={() => <Dept dept={props.dept} />} />
-        <Route
-          path='/bangluong'
-          component={() => <Salary staffs={props.staffs} />}
-        />
+        <Route path='/phongban' component={() => <Dept dept={dept} />} />
+        <Route path='/bangluong' component={() => <Salary staffs={staffs} />} />
         <Redirect to='/nhanvien' />
       </Switch>
       <Footer />
