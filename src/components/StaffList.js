@@ -4,7 +4,6 @@ import {
   CardImg,
   CardTitle,
   CardBody,
-  InputGroup,
   Input,
   Button,
   Breadcrumb,
@@ -43,7 +42,6 @@ class StaffList extends React.Component {
       department: 'Sale',
       annualLeave: 0,
       overTime: 0,
-      salary: 3000000,
       image: '/assets/images/girl.jpg',
       touched: {
         name: false,
