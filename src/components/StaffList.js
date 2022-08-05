@@ -157,6 +157,7 @@ class StaffList extends React.Component {
       errors.overTime = 'Vui lòng nhập số giờ tăng ca';
     return errors;
   }
+
   // map từng phần tử từ props để render
   staffList = props =>
     props
@@ -183,6 +184,7 @@ class StaffList extends React.Component {
       this.state.annualLeave,
       this.state.overTime
     );
+
     return (
       <div className='container mt-2'>
         <div className='row mt-2'>
