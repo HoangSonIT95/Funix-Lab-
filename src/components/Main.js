@@ -29,7 +29,6 @@ function Main() {
     const id = staffs.length;
     const newStaff = { id, ...staff };
     setStaffs([...staffs, newStaff]);
-    localStorage.setItem('staffs', JSON.stringify(staffs));
   };
 
   return (
