@@ -118,7 +118,6 @@ class StaffList extends React.Component {
       this.props.onAdd(newStaff);
     }
   };
-
   validate(
     name,
     doB,

@@ -9,8 +9,13 @@ import Dept from './Dept';
 import Salary from './Salary';
 
 function Main() {
-  const [staffs, setStaffs] = useState(STAFFS);
+  const [staffs, setStaffs] = useState(
+    localStorage.getItem('staffs')
+      ? JSON.parse(localStorage.getItem('staffs'))
+      : STAFFS
+  );
   const [dept, setDept] = useState(DEPARTMENTS);
+  localStorage.setItem('staffs', JSON.stringify(staffs));
   // lấy params để truyền vào staffDetail
   const StaffWithId = ({ match }) => {
     return (
@@ -24,6 +29,7 @@ function Main() {
     const id = staffs.length;
     const newStaff = { id, ...staff };
     setStaffs([...staffs, newStaff]);
+    localStorage.setItem('staffs', JSON.stringify(staffs));
   };
 
   return (
