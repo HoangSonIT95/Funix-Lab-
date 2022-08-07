@@ -35,25 +35,20 @@ function RenderSalary(props) {
 
 function Salary(props) {
   let staffList = props.staffs;
-
-  const [staffs, setStaffs] = useState({
+  /* const [staffs, setStaffs] = useState({
     staffs: staffList,
-  });
+  }); */
   const idDown = () => {
     staffList.sort(function (a, b) {
       return b.id - a.id;
     });
-    setStaffs({
-      staffs: staffList,
-    });
+    props.sort(staffList);
   };
   const idUp = () => {
     staffList.sort(function (a, b) {
       return a.id - b.id;
     });
-    setStaffs({
-      staffs: staffList,
-    });
+    props.sort(staffList);
   };
 
   const salaryDown = () => {
@@ -63,9 +58,7 @@ function Salary(props) {
         (a.salaryScale * 3000000 + a.overTime * 200000).toFixed(0)
       );
     });
-    setStaffs({
-      staffs: staffList,
-    });
+    props.sort(staffList);
   };
 
   const salaryUp = () => {
@@ -75,13 +68,43 @@ function Salary(props) {
         (b.salaryScale * 3000000 + b.overTime * 200000).toFixed(0)
       );
     });
-    setStaffs({
-      staffs: staffList,
-    });
+    props.sort(staffList);
   };
 
+  /*   const sort = type => {
+    console.log(type);
+    let staffs = props.staffs;
+    switch (type) {
+      case 'idUp':
+        staffs = props.staffs.sort((a, b) => {
+          a.id - b.id;
+        });
+        break;
+      case 'idDown':
+        staffs = props.staffs.sort((a, b) => {
+          b.id - a.id;
+        });
+        break;
+      case 'salaryUp':
+        staffs = props.staffs.sort((a, b) => {
+          (a.salaryScale * 3000000 + a.overTime * 200000).toFixed(0) -
+            (b.salaryScale * 3000000 + a.overTime * 200000).toFixed(0);
+        });
+        break;
+      case 'salaryDown':
+        staffs = props.staffs.sort((a, b) => {
+          (b.salaryScale * 3000000 + b.overTime * 200000).toFixed(0) -
+            (a.salaryScale * 3000000 + a.overTime * 200000).toFixed(0);
+        });
+        break;
+      default:
+        return staffs;
+    }
+    console.log(staffs);
+    props.sort(staffs);
+  }; */
   // map từng props truyền vào hàm RenderSalary để render
-  const staff = staffs.staffs.map(staff => {
+  const staffs = props.staffs.map(staff => {
     return <RenderSalary staff={staff} />;
   });
 
@@ -111,7 +134,7 @@ function Salary(props) {
           </UncontrolledDropdown>
         </div>
       </div>
-      <div className='row'>{staff}</div>
+      <div className='row'>{staffs}</div>
     </div>
   );
 }

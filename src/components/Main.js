@@ -1,5 +1,4 @@
-import React, { useState } from 'react';
-import { STAFFS, DEPARTMENTS } from '../shared/staffs';
+import React from 'react';
 import { Switch, Route, Redirect, withRouter } from 'react-router-dom';
 import Header from './Header';
 import Footer from './Footer';
@@ -11,23 +10,26 @@ import Salary from './Salary';
 import { connect } from 'react-redux';
 
 function Main(props) {
-  const [staffs, setStaffs] = useState(props.staffs);
-  const [dept, setDept] = useState(props.dept);
   // lấy params để truyền vào staffDetail
   const StaffWithId = ({ match }) => {
     return (
       <StaffDetail
-        staffId={staffs.find(nv => nv.id === parseInt(match.params.id, 10))}
+        staffId={props.staffs.find(
+          nv => nv.id === parseInt(match.params.id, 10)
+        )}
       />
     );
   };
 
-  const addStaff = staff => {
-    const id = staffs.length;
+  const handleAddStaff = staff => {
+    const id = props.staffs.length;
     const newStaff = { id, ...staff };
-    setStaffs([...staffs, newStaff]);
+    props.addStaff(newStaff);
   };
 
+  const handleSort = staffs => {
+    props.sortSalary(staffs);
+  };
   return (
     <div>
       <Header />
@@ -35,11 +37,20 @@ function Main(props) {
         <Route
           exact
           path='/nhanvien'
-          component={() => <StaffList onAdd={addStaff} staffs={staffs} />}
+          component={() => (
+            <StaffList
+              staffs={props.staffs}
+              dept={props.dept}
+              addStaff={handleAddStaff}
+            />
+          )}
         />
         <Route path='/nhanvien/:id' component={StaffWithId} />
-        <Route path='/phongban' component={() => <Dept dept={dept} />} />
-        <Route path='/bangluong' component={() => <Salary staffs={staffs} />} />
+        <Route path='/phongban' component={() => <Dept dept={props.dept} />} />
+        <Route
+          path='/bangluong'
+          component={() => <Salary staffs={props.staffs} sort={handleSort} />}
+        />
         <Redirect to='/nhanvien' />
       </Switch>
       <Footer />
@@ -51,4 +62,12 @@ const mapStateToProps = state => {
   return { staffs: state.staffs, dept: state.dept };
 };
 
-export default withRouter(connect(mapStateToProps)(Main));
+const mapDispatchToProps = dispatch => {
+  return {
+    addStaff: newStaff => dispatch({ type: 'ADD_STAFF', payload: newStaff }),
+    sortSalary: newStaffs =>
+      dispatch({ type: 'SORT_SALARY', payload: newStaffs }),
+  };
+};
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Main));

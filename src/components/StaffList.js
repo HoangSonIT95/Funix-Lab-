@@ -1,10 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {
   Card,
   CardImg,
   CardTitle,
   CardBody,
-  InputGroup,
   Input,
   Button,
   Breadcrumb,
@@ -15,7 +14,6 @@ import {
   FormGroup,
   Label,
   Col,
-  FormFeedback,
 } from 'reactstrap';
 import { Control, LocalForm, Errors } from 'react-redux-form';
 import { Link } from 'react-router-dom';
@@ -47,19 +45,20 @@ class StaffList extends React.Component {
     };
     this.onSearch = this.onSearch.bind(this);
     this.toggleModal = this.toggleModal.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleAddStaff = this.handleAddStaff.bind(this);
   }
 
   onSearch = event => {
     event.preventDefault();
     this.setState({ keywords: event.target.searchName.value });
+    event.target.searchName.value = '';
   };
 
   toggleModal() {
     this.setState({ isModalOpen: !this.state.isModalOpen });
   }
 
-  handleSubmit = value => {
+  handleAddStaff = value => {
     this.toggleModal();
     // lấy dữ liệu tạo nhân viên mới
     const newStaff = {
@@ -67,13 +66,13 @@ class StaffList extends React.Component {
       doB: value.doB,
       salaryScale: value.salaryScale,
       startDate: value.startDate,
-      department: value.department,
+      department: this.props.dept.find(dept => dept.name === value.department),
       annualLeave: value.annualLeave,
       overTime: value.overTime,
       image: this.state.image,
     };
     // thêm nhân viên mới vào hàm onAdd callback
-    this.props.onAdd(newStaff);
+    this.props.addStaff(newStaff);
   };
   // map từng phần tử từ props để render
   staffList = props =>
@@ -108,7 +107,7 @@ class StaffList extends React.Component {
           <Modal isOpen={this.state.isModalOpen} toggle={this.toggleModal}>
             <ModalHeader>Thêm Nhân Viên Mới</ModalHeader>
             <ModalBody>
-              <LocalForm onSubmit={value => this.handleSubmit(value)}>
+              <LocalForm onSubmit={value => this.handleAddStaff(value)}>
                 <FormGroup row>
                   <Label htmlFor='name' className='col-4'>
                     Họ và Tên
