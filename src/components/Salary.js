@@ -13,20 +13,17 @@ import {
 } from 'reactstrap';
 import { Link } from 'react-router-dom';
 
-function RenderSalary(props) {
+function RenderSalary({ staff }) {
   return (
     <Card className='col-lg-3 col-md-5 m-1'>
-      <CardTitle className='m-2'>{props.staff.name}</CardTitle>
+      <CardTitle className='m-2'>{staff.name}</CardTitle>
       <CardBody>
-        <CardText>Mã Nhân Viên: {props.staff.id}</CardText>
-        <CardText>Hệ Số Lương: {props.staff.salaryScale}</CardText>
-        <CardText>Số Ngày Làm Thêm: {props.staff.overTime}</CardText>
+        <CardText>Mã Nhân Viên: {staff.id}</CardText>
+        <CardText>Hệ Số Lương: {staff.salaryScale}</CardText>
+        <CardText>Số Ngày Làm Thêm: {staff.overTime}</CardText>
         <CardText className='bg-light p-2 shadow'>
           Lương:{' '}
-          {(
-            props.staff.salaryScale * 3000000 +
-            props.staff.overTime * 200000
-          ).toFixed(0)}
+          {(staff.salaryScale * 3000000 + staff.overTime * 200000).toFixed(0)}
         </CardText>
       </CardBody>
     </Card>
@@ -35,20 +32,24 @@ function RenderSalary(props) {
 
 function Salary(props) {
   let staffList = props.staffs;
-  /* const [staffs, setStaffs] = useState({
+  const [staffs, setStaffs] = useState({
     staffs: staffList,
-  }); */
+  });
   const idDown = () => {
     staffList.sort(function (a, b) {
       return b.id - a.id;
     });
-    props.sort(staffList);
+    setStaffs({
+      staffs: staffList,
+    });
   };
   const idUp = () => {
     staffList.sort(function (a, b) {
       return a.id - b.id;
     });
-    props.sort(staffList);
+    setStaffs({
+      staffs: staffList,
+    });
   };
 
   const salaryDown = () => {
@@ -58,7 +59,9 @@ function Salary(props) {
         (a.salaryScale * 3000000 + a.overTime * 200000).toFixed(0)
       );
     });
-    props.sort(staffList);
+    setStaffs({
+      staffs: staffList,
+    });
   };
 
   const salaryUp = () => {
@@ -68,43 +71,13 @@ function Salary(props) {
         (b.salaryScale * 3000000 + b.overTime * 200000).toFixed(0)
       );
     });
-    props.sort(staffList);
+    setStaffs({
+      staffs: staffList,
+    });
   };
 
-  /*   const sort = type => {
-    console.log(type);
-    let staffs = props.staffs;
-    switch (type) {
-      case 'idUp':
-        staffs = props.staffs.sort((a, b) => {
-          a.id - b.id;
-        });
-        break;
-      case 'idDown':
-        staffs = props.staffs.sort((a, b) => {
-          b.id - a.id;
-        });
-        break;
-      case 'salaryUp':
-        staffs = props.staffs.sort((a, b) => {
-          (a.salaryScale * 3000000 + a.overTime * 200000).toFixed(0) -
-            (b.salaryScale * 3000000 + a.overTime * 200000).toFixed(0);
-        });
-        break;
-      case 'salaryDown':
-        staffs = props.staffs.sort((a, b) => {
-          (b.salaryScale * 3000000 + b.overTime * 200000).toFixed(0) -
-            (a.salaryScale * 3000000 + a.overTime * 200000).toFixed(0);
-        });
-        break;
-      default:
-        return staffs;
-    }
-    console.log(staffs);
-    props.sort(staffs);
-  }; */
   // map từng props truyền vào hàm RenderSalary để render
-  const staffs = props.staffs.map(staff => {
+  const staffSalary = staffs.staffs.map(staff => {
     return <RenderSalary staff={staff} />;
   });
 
@@ -134,7 +107,7 @@ function Salary(props) {
           </UncontrolledDropdown>
         </div>
       </div>
-      <div className='row'>{staffs}</div>
+      <div className='row'>{staffSalary}</div>
     </div>
   );
 }

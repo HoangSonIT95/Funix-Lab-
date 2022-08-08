@@ -27,9 +27,6 @@ function Main(props) {
     props.addStaff(newStaff);
   };
 
-  const handleSort = staffs => {
-    props.sortSalary(staffs);
-  };
   return (
     <div>
       <Header />
@@ -49,7 +46,7 @@ function Main(props) {
         <Route path='/phongban' component={() => <Dept dept={props.dept} />} />
         <Route
           path='/bangluong'
-          component={() => <Salary staffs={props.staffs} sort={handleSort} />}
+          component={() => <Salary staffs={props.staffs} />}
         />
         <Redirect to='/nhanvien' />
       </Switch>
@@ -65,8 +62,6 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     addStaff: newStaff => dispatch({ type: 'ADD_STAFF', payload: newStaff }),
-    sortSalary: newStaffs =>
-      dispatch({ type: 'SORT_SALARY', payload: newStaffs }),
   };
 };
 
