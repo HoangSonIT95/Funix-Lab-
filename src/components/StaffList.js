@@ -17,6 +17,7 @@ import {
 } from 'reactstrap';
 import { Control, LocalForm, Errors } from 'react-redux-form';
 import { Link } from 'react-router-dom';
+import { Loading } from './Loading';
 
 function RenderStaff({ staff }) {
   return (
@@ -91,248 +92,268 @@ class StaffList extends React.Component {
       });
 
   render() {
-    return (
-      <div className='container mt-2'>
-        <div className='row mt-2'>
-          <div className='col-lg-5 col-md-4 col-sm-4'>
-            <Breadcrumb>
-              <h6>Danh Sách Nhân Viên</h6>
-            </Breadcrumb>
+    console.log(this.props);
+    /* if (this.props.staffs.isLoading) {
+      return (
+        <div className='container'>
+          <div className='row'>
+            <Loading />
           </div>
-          <div className='col-lg-3 col-md-4 col-sm-4 mb-2'>
-            <Button color='primary' onClick={this.toggleModal}>
-              Thêm Nhân Viên
-            </Button>
+        </div>
+      );
+    } else  */ if (this.props.staffs.errMess) {
+      return (
+        <div className='container'>
+          <div className='row'>
+            <h4>{this.props.staffs.errMess}</h4>
           </div>
-          <Modal isOpen={this.state.isModalOpen} toggle={this.toggleModal}>
-            <ModalHeader>Thêm Nhân Viên Mới</ModalHeader>
-            <ModalBody>
-              <LocalForm onSubmit={value => this.handleAddStaff(value)}>
-                <FormGroup row>
-                  <Label htmlFor='name' className='col-4'>
-                    Họ và Tên
-                  </Label>
-                  <Col className='col-8 '>
-                    <Control.text
-                      model='.name'
-                      id='name'
-                      name='name'
-                      className='form-control'
-                      validators={{
-                        required,
-                        minLength: minLength(3),
-                        maxLength: maxLength(30),
-                      }}
-                    />
-                    <Errors
-                      className='text-danger'
-                      model='.name'
-                      show='touched'
-                      messages={{
-                        minLength: 'Tên nhân viên phải nhiều hơn 3 kí tự',
-                        maxLength: 'Tên nhân viên phải ít hơn 10 kí tự',
-                      }}
-                    />
-                  </Col>
-                </FormGroup>
-                <FormGroup row>
-                  <Label htmlFor='doB' className='col-4'>
-                    Ngày sinh
-                  </Label>
-                  <Col className='col-8 '>
-                    <Control.text
-                      model='.doB'
-                      id='doB'
-                      name='doB'
-                      type='date'
-                      className='form-control'
-                      validators={{
-                        required,
-                      }}
-                    />
-                    <Errors
-                      className='text-danger'
-                      model='.doB'
-                      show='touched'
-                      messages={{
-                        required: 'Vui lòng nhập ngày sinh của nhân viên',
-                      }}
-                    />
-                  </Col>
-                </FormGroup>
-                <FormGroup row>
-                  <Label htmlFor='startDate' className='col-4'>
-                    Ngày vào công ty
-                  </Label>
-                  <Col className='col-8 '>
-                    <Control.text
-                      model='.startDate'
-                      id='startDate'
-                      name='startDate'
-                      type='date'
-                      className='form-control'
-                      validators={{
-                        required,
-                      }}
-                    />
-                    <Errors
-                      className='text-danger'
-                      model='.startDate'
-                      show='touched'
-                      messages={{
-                        required: 'Vui lòng nhập ngày vào công ty',
-                      }}
-                    />
-                  </Col>
-                </FormGroup>
-                <FormGroup row>
-                  <Label htmlFor='department' className='col-4'>
-                    Phòng Ban
-                  </Label>
-                  <Col className='col-8 '>
-                    <Control.select
-                      model='.department'
-                      id='department'
-                      name='department'
-                      className='form-control'
-                      defaultValue='Sale'
-                      validators={{
-                        required,
-                      }}
-                    >
-                      <option>Sale</option>
-                      <option>HR</option>
-                      <option>Marketing</option>
-                      <option>IT</option>
-                      <option>Finance</option>
-                    </Control.select>
-                    <Errors
-                      className='text-danger'
-                      model='.department'
-                      show='touched'
-                      messages={{
-                        required: 'Vui lòng chọn phòng ban',
-                      }}
-                    />
-                  </Col>
-                </FormGroup>
-                <FormGroup row>
-                  <Label htmlFor='salaryScale' className='col-4'>
-                    Hệ số lương
-                  </Label>
-                  <Col className='col-8 '>
-                    <Control.text
-                      model='.salaryScale'
-                      id='salaryScale'
-                      name='salaryScale'
-                      className='form-control'
-                      defaultValue='1'
-                      validators={{
-                        required,
-                        isNumber,
-                      }}
-                    />
-                    <Errors
-                      className='text-danger'
-                      model='.salaryScale'
-                      show='touched'
-                      messages={{
-                        required: 'Vui lòng nhập hệ số lương',
-                        isNumber: 'Chỉ nhập số',
-                      }}
-                    />
-                  </Col>
-                </FormGroup>
-                <FormGroup row>
-                  <Label htmlFor='annualLeave' className='col-4'>
-                    Số ngày nghỉ còn lại
-                  </Label>
-                  <Col className='col-8 '>
-                    <Control.text
-                      model='.annualLeave'
-                      id='annualLeave'
-                      name='annualLeave'
-                      className='form-control'
-                      defaultValue='0'
-                      validators={{
-                        required,
-                        isNumber,
-                      }}
-                    />
-                    <Errors
-                      className='text-danger'
-                      model='.annualLeave'
-                      show='touched'
-                      messages={{
-                        required: 'Vui lòng nhập ngày phép còn lại',
-                        isNumber: 'Chỉ nhập số',
-                      }}
-                    />
-                  </Col>
-                </FormGroup>
-                <FormGroup row>
-                  <Label htmlFor='overTime' className='col-4'>
-                    Số giờ làm thêm
-                  </Label>
-                  <Col className='col-8 '>
-                    <Control.text
-                      model='.overTime'
-                      id='overTime'
-                      name='overTime'
-                      className='form-control'
-                      defaultValue='0'
-                      validators={{
-                        required,
-                        isNumber,
-                      }}
-                    />
-                    <Errors
-                      className='text-danger'
-                      model='.overTime'
-                      show='touched'
-                      messages={{
-                        required: 'Vui lòng nhập số giờ làm thêm',
-                        isNumber: 'Chỉ nhập số',
-                      }}
-                    />
-                  </Col>
-                </FormGroup>
-
-                <Button type='submit' value='submit' color='primary'>
-                  Thêm
-                </Button>
-              </LocalForm>
-            </ModalBody>
-          </Modal>
-          <div className='col-lg-4 col-md-4 col-sm-4'>
-            <Form className='row' type='submit' onSubmit={this.onSearch}>
-              <Input
-                className='col-lg-6 col-md-7 col-sm-6'
-                placeholder='Tìm nhân viên'
-                name='searchName'
-              />
-              <Button
-                className='col-lg-4 col-md-5 col-sm-6'
-                type='submit'
-                color='primary'
-              >
-                <i className='fa fa-search' aria-hidden='true'></i>
-                Tìm Kiếm
+        </div>
+      );
+    } else
+      return (
+        <div className='container mt-2'>
+          <div className='row mt-2'>
+            <div className='col-lg-5 col-md-4 col-sm-4'>
+              <Breadcrumb>
+                <h6>Danh Sách Nhân Viên</h6>
+              </Breadcrumb>
+            </div>
+            <div className='col-lg-3 col-md-4 col-sm-4 mb-2'>
+              <Button color='primary' onClick={this.toggleModal}>
+                Thêm Nhân Viên
               </Button>
-            </Form>
+            </div>
+            <Modal isOpen={this.state.isModalOpen} toggle={this.toggleModal}>
+              <ModalHeader>Thêm Nhân Viên Mới</ModalHeader>
+              <ModalBody>
+                <LocalForm onSubmit={value => this.handleAddStaff(value)}>
+                  <FormGroup row>
+                    <Label htmlFor='name' className='col-4'>
+                      Họ và Tên
+                    </Label>
+                    <Col className='col-8 '>
+                      <Control.text
+                        model='.name'
+                        id='name'
+                        name='name'
+                        className='form-control'
+                        validators={{
+                          required,
+                          minLength: minLength(3),
+                          maxLength: maxLength(30),
+                        }}
+                      />
+                      <Errors
+                        className='text-danger'
+                        model='.name'
+                        show='touched'
+                        messages={{
+                          minLength: 'Tên nhân viên phải nhiều hơn 3 kí tự',
+                          maxLength: 'Tên nhân viên phải ít hơn 10 kí tự',
+                        }}
+                      />
+                    </Col>
+                  </FormGroup>
+                  <FormGroup row>
+                    <Label htmlFor='doB' className='col-4'>
+                      Ngày sinh
+                    </Label>
+                    <Col className='col-8 '>
+                      <Control.text
+                        model='.doB'
+                        id='doB'
+                        name='doB'
+                        type='date'
+                        className='form-control'
+                        validators={{
+                          required,
+                        }}
+                      />
+                      <Errors
+                        className='text-danger'
+                        model='.doB'
+                        show='touched'
+                        messages={{
+                          required: 'Vui lòng nhập ngày sinh của nhân viên',
+                        }}
+                      />
+                    </Col>
+                  </FormGroup>
+                  <FormGroup row>
+                    <Label htmlFor='startDate' className='col-4'>
+                      Ngày vào công ty
+                    </Label>
+                    <Col className='col-8 '>
+                      <Control.text
+                        model='.startDate'
+                        id='startDate'
+                        name='startDate'
+                        type='date'
+                        className='form-control'
+                        validators={{
+                          required,
+                        }}
+                      />
+                      <Errors
+                        className='text-danger'
+                        model='.startDate'
+                        show='touched'
+                        messages={{
+                          required: 'Vui lòng nhập ngày vào công ty',
+                        }}
+                      />
+                    </Col>
+                  </FormGroup>
+                  <FormGroup row>
+                    <Label htmlFor='department' className='col-4'>
+                      Phòng Ban
+                    </Label>
+                    <Col className='col-8 '>
+                      <Control.select
+                        model='.department'
+                        id='department'
+                        name='department'
+                        className='form-control'
+                        defaultValue='Sale'
+                        validators={{
+                          required,
+                        }}
+                      >
+                        <option>Sale</option>
+                        <option>HR</option>
+                        <option>Marketing</option>
+                        <option>IT</option>
+                        <option>Finance</option>
+                      </Control.select>
+                      <Errors
+                        className='text-danger'
+                        model='.department'
+                        show='touched'
+                        messages={{
+                          required: 'Vui lòng chọn phòng ban',
+                        }}
+                      />
+                    </Col>
+                  </FormGroup>
+                  <FormGroup row>
+                    <Label htmlFor='salaryScale' className='col-4'>
+                      Hệ số lương
+                    </Label>
+                    <Col className='col-8 '>
+                      <Control.text
+                        model='.salaryScale'
+                        id='salaryScale'
+                        name='salaryScale'
+                        className='form-control'
+                        defaultValue='1'
+                        validators={{
+                          required,
+                          isNumber,
+                        }}
+                      />
+                      <Errors
+                        className='text-danger'
+                        model='.salaryScale'
+                        show='touched'
+                        messages={{
+                          required: 'Vui lòng nhập hệ số lương',
+                          isNumber: 'Chỉ nhập số',
+                        }}
+                      />
+                    </Col>
+                  </FormGroup>
+                  <FormGroup row>
+                    <Label htmlFor='annualLeave' className='col-4'>
+                      Số ngày nghỉ còn lại
+                    </Label>
+                    <Col className='col-8 '>
+                      <Control.text
+                        model='.annualLeave'
+                        id='annualLeave'
+                        name='annualLeave'
+                        className='form-control'
+                        defaultValue='0'
+                        validators={{
+                          required,
+                          isNumber,
+                        }}
+                      />
+                      <Errors
+                        className='text-danger'
+                        model='.annualLeave'
+                        show='touched'
+                        messages={{
+                          required: 'Vui lòng nhập ngày phép còn lại',
+                          isNumber: 'Chỉ nhập số',
+                        }}
+                      />
+                    </Col>
+                  </FormGroup>
+                  <FormGroup row>
+                    <Label htmlFor='overTime' className='col-4'>
+                      Số giờ làm thêm
+                    </Label>
+                    <Col className='col-8 '>
+                      <Control.text
+                        model='.overTime'
+                        id='overTime'
+                        name='overTime'
+                        className='form-control'
+                        defaultValue='0'
+                        validators={{
+                          required,
+                          isNumber,
+                        }}
+                      />
+                      <Errors
+                        className='text-danger'
+                        model='.overTime'
+                        show='touched'
+                        messages={{
+                          required: 'Vui lòng nhập số giờ làm thêm',
+                          isNumber: 'Chỉ nhập số',
+                        }}
+                      />
+                    </Col>
+                  </FormGroup>
+
+                  <Button type='submit' value='submit' color='primary'>
+                    Thêm
+                  </Button>
+                </LocalForm>
+              </ModalBody>
+            </Modal>
+            <div className='col-lg-4 col-md-4 col-sm-4'>
+              <Form className='row' type='submit' onSubmit={this.onSearch}>
+                <Input
+                  className='col-lg-6 col-md-7 col-sm-6'
+                  placeholder='Tìm nhân viên'
+                  name='searchName'
+                />
+                <Button
+                  className='col-lg-4 col-md-5 col-sm-6'
+                  type='submit'
+                  color='primary'
+                >
+                  <i className='fa fa-search' aria-hidden='true'></i>
+                  Tìm Kiếm
+                </Button>
+              </Form>
+            </div>
+          </div>
+          <div className='row'>
+            {this.staffList(this.props.staffs.staffs).length > 0 ? (
+              this.staffList(this.props.staffs.staffs)
+            ) : (
+              <h4
+                style={{ marginLeft: '27%', color: 'red', marginBottom: '5%' }}
+              >
+                Không tìm thấy kết quả phù hợp
+              </h4>
+            )}
           </div>
         </div>
-        <div className='row'>
-          {this.staffList(this.props.staffs).length > 0 ? (
-            this.staffList(this.props.staffs)
-          ) : (
-            <h4 style={{ marginLeft: '27%', color: 'red', marginBottom: '5%' }}>
-              Không tìm thấy kết quả phù hợp
-            </h4>
-          )}
-        </div>
-      </div>
-    );
+      );
   }
 }
 
