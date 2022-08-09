@@ -1,22 +1,22 @@
 import * as ActionTypes from './ActionTypes';
 
-export const Departments = (
-  state = { isLoading: true, errMess: null, dept: [] },
+export const Salary = (
+  state = { isLoading: true, errMess: null, salary: [] },
   action
 ) => {
   switch (action.type) {
-    case ActionTypes.DEPTS:
+    case ActionTypes.SALARY:
       return {
         ...state,
         isLoading: false,
         errMess: null,
-        dept: action.payload,
+        salary: action.payload,
       };
 
-    case ActionTypes.DEPTS_LOADING:
-      return { ...state, isLoading: true, errMess: null, dept: [] };
+    case ActionTypes.SALARY_LOADING:
+      return { ...state, isLoading: true, errMess: null, salary: [] };
 
-    case ActionTypes.DEPTS_FAILED:
+    case ActionTypes.SALARY_FAILED:
       return { ...state, isLoading: false, errMess: action.payload };
     default:
       return state;

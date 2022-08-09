@@ -40,7 +40,6 @@ class StaffList extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      image: '/assets/images/girl.jpg',
       keywords: '',
       isModalOpen: false,
     };
@@ -67,13 +66,17 @@ class StaffList extends React.Component {
       doB: value.doB,
       salaryScale: value.salaryScale,
       startDate: value.startDate,
-      department: this.props.dept.find(dept => dept.name === value.department),
+      departmentId: this.props.dept.find(dept => dept.name === value.department)
+        .id,
       annualLeave: value.annualLeave,
       overTime: value.overTime,
-      image: this.state.image,
+      image: '/assets/images/girl.jpg',
+      salary: (value.salaryScale * 3000000 + value.overTime * 200000).toFixed(
+        0
+      ),
     };
     // thêm nhân viên mới vào hàm onAdd callback
-    this.props.addStaff(newStaff);
+    this.props.postStaff(newStaff);
   };
   // map từng phần tử từ props để render
   staffList = props =>
@@ -103,8 +106,8 @@ class StaffList extends React.Component {
     } else if (this.props.staffs.errMess) {
       return (
         <div className='container'>
-          <div className='row'>
-            <h4>{this.props.staffs.errMess}</h4>
+          <div className='row mt-2'>
+            <h3 style={{ color: 'red' }}>{this.props.staffs.errMess}</h3>
           </div>
         </div>
       );

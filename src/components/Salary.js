@@ -12,6 +12,7 @@ import {
   UncontrolledDropdown,
 } from 'reactstrap';
 import { Link } from 'react-router-dom';
+import { Loading } from './Loading';
 
 function RenderSalary({ staff }) {
   return (
@@ -22,8 +23,7 @@ function RenderSalary({ staff }) {
         <CardText>Hệ Số Lương: {staff.salaryScale}</CardText>
         <CardText>Số Ngày Làm Thêm: {staff.overTime}</CardText>
         <CardText className='bg-light p-2 shadow'>
-          Lương:{' '}
-          {(staff.salaryScale * 3000000 + staff.overTime * 200000).toFixed(0)}
+          Lương: {staff.salary}
         </CardText>
       </CardBody>
     </Card>
@@ -31,7 +31,8 @@ function RenderSalary({ staff }) {
 }
 
 function Salary(props) {
-  let staffList = props.staffs;
+  console.log(props);
+  let staffList = props.salary.salary;
   const [staffs, setStaffs] = useState({
     staffs: staffList,
   });
@@ -54,10 +55,7 @@ function Salary(props) {
 
   const salaryDown = () => {
     staffList.sort(function (a, b) {
-      return (
-        (b.salaryScale * 3000000 + b.overTime * 200000).toFixed(0) -
-        (a.salaryScale * 3000000 + a.overTime * 200000).toFixed(0)
-      );
+      return b.salary - a.salary;
     });
     setStaffs({
       staffs: staffList,
@@ -66,50 +64,64 @@ function Salary(props) {
 
   const salaryUp = () => {
     staffList.sort(function (a, b) {
-      return (
-        (a.salaryScale * 3000000 + a.overTime * 200000).toFixed(0) -
-        (b.salaryScale * 3000000 + b.overTime * 200000).toFixed(0)
-      );
+      return a.salary - b.salary;
     });
     setStaffs({
       staffs: staffList,
     });
   };
-
-  // map từng props truyền vào hàm RenderSalary để render
-  const staffSalary = staffs.staffs.map(staff => {
-    return <RenderSalary staff={staff} />;
-  });
-
-  return (
-    <div className='container'>
-      <div className='row mt-2'>
-        <div className='col-lg-7 col-md-6 col-sm-6'>
-          <Breadcrumb>
-            <BreadcrumbItem>
-              <Link to='/nhanvien'>Nhân Viên</Link>
-            </BreadcrumbItem>
-            <BreadcrumbItem active>Bảng Lương</BreadcrumbItem>
-          </Breadcrumb>
-        </div>
-
-        <div className='col-lg-3 col-md-4 col-sm-6'>
-          <UncontrolledDropdown className='ml-5' direction='down'>
-            <DropdownToggle caret color='primary'>
-              Sắp Xếp
-            </DropdownToggle>
-            <DropdownMenu>
-              <DropdownItem onClick={idUp}>ID tăng dần</DropdownItem>
-              <DropdownItem onClick={idDown}>ID giảm dần</DropdownItem>
-              <DropdownItem onClick={salaryUp}>Lương tăng dần</DropdownItem>
-              <DropdownItem onClick={salaryDown}>Lương giảm dần</DropdownItem>
-            </DropdownMenu>
-          </UncontrolledDropdown>
+  if (props.salary.isLoading) {
+    return (
+      <div className='container '>
+        <div className='row'>
+          <Loading />
         </div>
       </div>
-      <div className='row'>{staffSalary}</div>
-    </div>
-  );
+    );
+  } else if (props.salary.errMess) {
+    return (
+      <div className='container'>
+        <div className='row mt-2'>
+          <h3 style={{ color: 'red' }}>{props.salary.errMess}</h3>
+        </div>
+      </div>
+    );
+  } else {
+    // map từng props truyền vào hàm RenderSalary để render
+    const staffSalary = staffs.staffs.map(staff => {
+      return <RenderSalary staff={staff} />;
+    });
+
+    return (
+      <div className='container'>
+        <div className='row mt-2'>
+          <div className='col-lg-7 col-md-6 col-sm-6'>
+            <Breadcrumb>
+              <BreadcrumbItem>
+                <Link to='/nhanvien'>Nhân Viên</Link>
+              </BreadcrumbItem>
+              <BreadcrumbItem active>Bảng Lương</BreadcrumbItem>
+            </Breadcrumb>
+          </div>
+
+          <div className='col-lg-3 col-md-4 col-sm-6'>
+            <UncontrolledDropdown className='ml-5' direction='down'>
+              <DropdownToggle caret color='primary'>
+                Sắp Xếp
+              </DropdownToggle>
+              <DropdownMenu>
+                <DropdownItem onClick={idUp}>ID tăng dần</DropdownItem>
+                <DropdownItem onClick={idDown}>ID giảm dần</DropdownItem>
+                <DropdownItem onClick={salaryUp}>Lương tăng dần</DropdownItem>
+                <DropdownItem onClick={salaryDown}>Lương giảm dần</DropdownItem>
+              </DropdownMenu>
+            </UncontrolledDropdown>
+          </div>
+        </div>
+        <div className='row'>{staffSalary}</div>
+      </div>
+    );
+  }
 }
 
 export default Salary;

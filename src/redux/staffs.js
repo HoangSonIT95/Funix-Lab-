@@ -1,4 +1,3 @@
-import { STAFFS } from '../shared/staffs';
 import * as ActionTypes from './ActionTypes';
 
 export const Staffs = (
@@ -8,7 +7,6 @@ export const Staffs = (
   switch (action.type) {
     case ActionTypes.ADD_STAFF:
       const newStaff = action.payload;
-
       return { ...state, staffs: [...state.staffs, newStaff] };
     case ActionTypes.STAFFS:
       return {

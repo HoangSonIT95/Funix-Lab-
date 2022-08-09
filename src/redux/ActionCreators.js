@@ -5,13 +5,69 @@ export const addStaff = staff => ({
   type: ActionTypes.ADD_STAFF,
   payload: staff,
 });
+export const postStaff = staff => dispatch => {
+  const newStaff = staff;
+
+  return fetch(baseUrl + 'staffs', {
+    method: 'POST',
+    body: JSON.stringify(newStaff),
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    credentials: 'same-origin',
+  })
+    .then(
+      response => {
+        if (response.ok) {
+          return response;
+        } else {
+          var error = new Error(
+            'Error ' + response.status + ': ' + response.statusText
+          );
+          error.response = response;
+          throw error;
+        }
+      },
+      error => {
+        throw error;
+      }
+    )
+    .then(response => response.json())
+    .then(response => dispatch(addStaff(response)))
+    .catch(error => {
+      console.log('post staff', error.message);
+      alert('Your comment could not be posted\nError: ' + error.message);
+    });
+};
 
 export const fetchStaffs = () => dispatch => {
   dispatch(staffsLoading(true));
 
   return fetch(baseUrl + 'staffs')
+    .then(
+      response => {
+        if (response.ok) {
+          return response;
+        } else {
+          var error = new Error(
+            'Error ' +
+              response.status +
+              ': ' +
+              response.statusText +
+              '. Please try again later'
+          );
+          error.response = response;
+          throw error;
+        }
+      },
+      error => {
+        var errmess = new Error(error.message + '. Please try again later');
+        throw errmess;
+      }
+    )
     .then(response => response.json())
-    .then(staffs => dispatch(staffsSuccess(staffs)));
+    .then(staffs => dispatch(staffsSuccess(staffs)))
+    .catch(error => dispatch(staffsFailed(error.message)));
 };
 
 export const staffsLoading = () => ({
@@ -32,20 +88,86 @@ export const fetchDept = () => dispatch => {
   dispatch(deptLoading(true));
 
   return fetch(baseUrl + 'departments')
+    .then(
+      response => {
+        if (response.ok) {
+          return response;
+        } else {
+          var error = new Error(
+            'Error ' +
+              response.status +
+              ': ' +
+              response.statusText +
+              '. Please try again later'
+          );
+          error.response = response;
+          throw error;
+        }
+      },
+      error => {
+        var errmess = new Error(error.message + '. Please try again later');
+        throw errmess;
+      }
+    )
     .then(response => response.json())
-    .then(departments => dispatch(deptSuccess(departments)));
+    .then(dept => dispatch(deptSuccess(dept)))
+    .catch(error => dispatch(deptFailed(error.message)));
 };
 
 export const deptLoading = () => ({
-  type: ActionTypes.DEPT_LOADING,
+  type: ActionTypes.DEPTS_LOADING,
 });
 
 export const deptFailed = errmess => ({
-  type: ActionTypes.DEPT_FAILED,
+  type: ActionTypes.DEPTS_FAILED,
   payload: errmess,
 });
 
 export const deptSuccess = dept => ({
-  type: ActionTypes.DEPT,
+  type: ActionTypes.DEPTS,
   payload: dept,
+});
+
+export const fetchSalary = () => dispatch => {
+  dispatch(salaryLoading(true));
+
+  return fetch(baseUrl + 'staffsSalary')
+    .then(
+      response => {
+        if (response.ok) {
+          return response;
+        } else {
+          var error = new Error(
+            'Error ' +
+              response.status +
+              ': ' +
+              response.statusText +
+              '. Please try again later'
+          );
+          error.response = response;
+          throw error;
+        }
+      },
+      error => {
+        var errmess = new Error(error.message + '. Please try again later');
+        throw errmess;
+      }
+    )
+    .then(response => response.json())
+    .then(salary => dispatch(salarySuccess(salary)))
+    .catch(error => dispatch(salaryFailed(error.message)));
+};
+
+export const salaryLoading = () => ({
+  type: ActionTypes.SALARY_LOADING,
+});
+
+export const salaryFailed = errmess => ({
+  type: ActionTypes.SALARY_FAILED,
+  payload: errmess,
+});
+
+export const salarySuccess = salary => ({
+  type: ActionTypes.SALARY,
+  payload: salary,
 });

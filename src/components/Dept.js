@@ -16,7 +16,7 @@ function RenderDept(props) {
 const Dept = props => {
   if (props.dept.isLoading) {
     return (
-      <div className='container'>
+      <div className='container '>
         <div className='row'>
           <Loading />
         </div>
@@ -25,8 +25,8 @@ const Dept = props => {
   } else if (props.dept.errMess) {
     return (
       <div className='container'>
-        <div className='row'>
-          <h4>{props.dept.errMess}</h4>
+        <div className='row mt-2'>
+          <h3 style={{ color: 'red' }}>{props.dept.errMess}</h3>
         </div>
       </div>
     );

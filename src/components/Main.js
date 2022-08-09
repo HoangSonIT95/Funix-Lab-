@@ -7,18 +7,24 @@ import StaffList from './StaffList';
 import StaffDetail from './StaffDetail';
 import Dept from './Dept';
 import Salary from './Salary';
-import { addStaff, fetchStaffs, fetchDept } from '../redux/ActionCreators';
+import {
+  postStaff,
+  fetchStaffs,
+  fetchDept,
+  fetchSalary,
+} from '../redux/ActionCreators';
 
 // lấy state từ store redux làm props cho Main
 const mapStateToProps = state => {
-  return { staffs: state.staffs, dept: state.dept };
+  return { staffs: state.staffs, dept: state.dept, salary: state.salary };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    addStaff: newStaff => dispatch(addStaff(newStaff)),
+    postStaff: newStaff => dispatch(postStaff(newStaff)),
     fetchStaffs: () => dispatch(fetchStaffs()),
     fetchDept: () => dispatch(fetchDept()),
+    fetchSalary: () => dispatch(fetchSalary()),
   };
 };
 class Main extends React.Component {
@@ -33,8 +39,9 @@ class Main extends React.Component {
     return (
       <StaffDetail
         staffId={this.props.staffs.staffs.find(
-          nv => nv.id === parseInt(match.params.id, 10) 
-        )} dept={this.props.dept.dept}
+          nv => nv.id === parseInt(match.params.id, 10)
+        )}
+        dept={this.props.dept.dept}
       />
     );
   };
@@ -42,12 +49,14 @@ class Main extends React.Component {
   handleAddStaff = staff => {
     const id = this.props.staffs.staffs.length;
     const newStaff = { id, ...staff };
-    this.props.addStaff(newStaff);
+    this.props.postStaff(newStaff);
   };
   componentDidMount() {
     this.props.fetchStaffs();
     this.props.fetchDept();
+    this.props.fetchSalary();
   }
+
   render() {
     console.log(this.props);
     return (
@@ -61,7 +70,7 @@ class Main extends React.Component {
               <StaffList
                 staffs={this.props.staffs}
                 dept={this.props.dept.dept}
-                addStaff={this.handleAddStaff}
+                postStaff={this.handleAddStaff}
               />
             )}
           />
@@ -72,7 +81,7 @@ class Main extends React.Component {
           />
           <Route
             path='/bangluong'
-            component={() => <Salary staffs={this.props.staffs.staffs} />}
+            component={() => <Salary salary={this.props.salary} />}
           />
           <Redirect to='/nhanvien' />
         </Switch>
