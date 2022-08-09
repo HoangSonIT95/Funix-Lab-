@@ -6,8 +6,8 @@ export const Staffs = (
 ) => {
   switch (action.type) {
     case ActionTypes.ADD_STAFF:
-      const newStaff = action.payload;
-      return { ...state, staffs: [...state.staffs, newStaff] };
+      const staffs = action.payload;
+      return { ...state, staffs };
     case ActionTypes.STAFFS:
       return {
         ...state,

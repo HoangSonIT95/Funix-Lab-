@@ -1,9 +1,9 @@
 import * as ActionTypes from './ActionTypes';
 import { baseUrl } from '../shared/baseUrl';
 
-export const addStaff = staff => ({
+export const addStaff = staffs => ({
   type: ActionTypes.ADD_STAFF,
-  payload: staff,
+  payload: staffs,
 });
 export const postStaff = staff => dispatch => {
   const newStaff = staff;

@@ -79,8 +79,8 @@ class StaffList extends React.Component {
     this.props.postStaff(newStaff);
   };
   // map từng phần tử từ props để render
-  staffList = props =>
-    props
+  staffList = staffs =>
+    staffs
       .filter(staff => {
         return staff.name
           .toUpperCase()
