@@ -7,7 +7,7 @@ import StaffList from './StaffList';
 import StaffDetail from './StaffDetail';
 import Dept from './Dept';
 import Salary from './Salary';
-import { addStaff, fetchStaffs } from '../redux/ActionCreators';
+import { addStaff, fetchStaffs, fetchDept } from '../redux/ActionCreators';
 
 // lấy state từ store redux làm props cho Main
 const mapStateToProps = state => {
@@ -18,6 +18,7 @@ const mapDispatchToProps = dispatch => {
   return {
     addStaff: newStaff => dispatch(addStaff(newStaff)),
     fetchStaffs: () => dispatch(fetchStaffs()),
+    fetchDept: () => dispatch(fetchDept()),
   };
 };
 class Main extends React.Component {
@@ -32,8 +33,8 @@ class Main extends React.Component {
     return (
       <StaffDetail
         staffId={this.props.staffs.staffs.find(
-          nv => nv.id === parseInt(match.params.id, 10)
-        )}
+          nv => nv.id === parseInt(match.params.id, 10) 
+        )} dept={this.props.dept.dept}
       />
     );
   };
@@ -43,10 +44,12 @@ class Main extends React.Component {
     const newStaff = { id, ...staff };
     this.props.addStaff(newStaff);
   };
-  /* componentDidMount() {
+  componentDidMount() {
     this.props.fetchStaffs();
-  } */
+    this.props.fetchDept();
+  }
   render() {
+    console.log(this.props);
     return (
       <div>
         <Header />
@@ -57,7 +60,7 @@ class Main extends React.Component {
             component={() => (
               <StaffList
                 staffs={this.props.staffs}
-                dept={this.props.dept}
+                dept={this.props.dept.dept}
                 addStaff={this.handleAddStaff}
               />
             )}

@@ -10,7 +10,7 @@ export const Staffs = (
       const newStaff = action.payload;
 
       return { ...state, staffs: [...state.staffs, newStaff] };
-    case ActionTypes.ADD_STAFFS:
+    case ActionTypes.STAFFS:
       return {
         ...state,
         isLoading: false,

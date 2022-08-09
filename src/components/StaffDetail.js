@@ -21,7 +21,7 @@ function RenderImg({ staff }) {
   );
 }
 
-function RenderDescription({ staff }) {
+function RenderDescription({ staff, dept }) {
   return (
     <div className='col-12 col-lg-9 col-md-8 col-sm-12'>
       <CardBody className='card-taolao'>
@@ -31,8 +31,8 @@ function RenderDescription({ staff }) {
           Ngày vào công ty: {dateFormat(staff.startDate, 'dd/mm/yyyy')}
         </CardText>
         <CardText>
-          Phòng ban:{' '}
-          {staff.department.name ? staff.department.name : staff.department}
+          Phòng ban:
+          {dept.find(dept => dept.id === staff.departmentId).name}
         </CardText>
         <CardText>Số ngày nghỉ còn lại: {staff.annualLeave}</CardText>
         <CardText>Số ngày đã làm thêm: {staff.overTime}</CardText>
@@ -60,7 +60,7 @@ function StaffDetail(props) {
         <div className='container'>
           <div className='row'>
             <RenderImg staff={props.staffId} />
-            <RenderDescription staff={props.staffId} />
+            <RenderDescription staff={props.staffId} dept={props.dept} />
           </div>
         </div>
       </div>

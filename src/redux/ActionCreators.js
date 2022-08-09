@@ -1,5 +1,5 @@
 import * as ActionTypes from './ActionTypes';
-import { STAFFS } from '../shared/staffs';
+import { baseUrl } from '../shared/baseUrl';
 
 export const addStaff = staff => ({
   type: ActionTypes.ADD_STAFF,
@@ -9,9 +9,9 @@ export const addStaff = staff => ({
 export const fetchStaffs = () => dispatch => {
   dispatch(staffsLoading(true));
 
-  setTimeout(() => {
-    dispatch(addStaffs(STAFFS));
-  }, 2000);
+  return fetch(baseUrl + 'staffs')
+    .then(response => response.json())
+    .then(staffs => dispatch(staffsSuccess(staffs)));
 };
 
 export const staffsLoading = () => ({
@@ -23,7 +23,29 @@ export const staffsFailed = errmess => ({
   payload: errmess,
 });
 
-export const addStaffs = staffs => ({
-  type: ActionTypes.ADD_STAFFS,
+export const staffsSuccess = staffs => ({
+  type: ActionTypes.STAFFS,
   payload: staffs,
+});
+
+export const fetchDept = () => dispatch => {
+  dispatch(deptLoading(true));
+
+  return fetch(baseUrl + 'departments')
+    .then(response => response.json())
+    .then(departments => dispatch(deptSuccess(departments)));
+};
+
+export const deptLoading = () => ({
+  type: ActionTypes.DEPT_LOADING,
+});
+
+export const deptFailed = errmess => ({
+  type: ActionTypes.DEPT_FAILED,
+  payload: errmess,
+});
+
+export const deptSuccess = dept => ({
+  type: ActionTypes.DEPT,
+  payload: dept,
 });

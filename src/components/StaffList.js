@@ -92,8 +92,7 @@ class StaffList extends React.Component {
       });
 
   render() {
-    console.log(this.props);
-    /* if (this.props.staffs.isLoading) {
+    if (this.props.staffs.isLoading) {
       return (
         <div className='container'>
           <div className='row'>
@@ -101,7 +100,7 @@ class StaffList extends React.Component {
           </div>
         </div>
       );
-    } else  */ if (this.props.staffs.errMess) {
+    } else if (this.props.staffs.errMess) {
       return (
         <div className='container'>
           <div className='row'>
