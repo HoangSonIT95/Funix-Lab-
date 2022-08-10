@@ -72,7 +72,7 @@ class Main extends React.Component {
           <CSSTransition
             key={this.props.location.key}
             classNames='page'
-            timeout={100}
+            timeout={300}
           >
             <Switch location={this.props.location}>
               <Route

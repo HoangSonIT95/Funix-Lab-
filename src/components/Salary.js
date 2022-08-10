@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { Fragment, useState } from 'react';
 import {
   Card,
   CardText,
@@ -13,6 +13,7 @@ import {
 } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import { Loading } from './Loading';
+import { FadeTransform } from 'react-animation-components';
 
 function RenderSalary({ staff }) {
   return (
@@ -118,7 +119,14 @@ function Salary(props) {
             </UncontrolledDropdown>
           </div>
         </div>
-        <div className='row'>{staffSalary}</div>
+        <FadeTransform
+          in
+          transformProps={{
+            exitTransform: 'scale(0.2) translateY(-30%)',
+          }}
+        >
+          <div className='row'>{staffSalary}</div>
+        </FadeTransform>
       </div>
     );
   }

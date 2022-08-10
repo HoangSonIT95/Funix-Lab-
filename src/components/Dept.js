@@ -1,15 +1,23 @@
 import React from 'react';
 import { Card, CardText, CardTitle, CardBody } from 'reactstrap';
 import { Loading } from './Loading';
+import { FadeTransform } from 'react-animation-components';
 
 function RenderDept(props) {
   return (
-    <Card className='mt-3 mb-3'>
-      <CardTitle className='m-2 ml-3'>{props.dept.name}</CardTitle>
-      <CardBody>
-        <CardText>Số Lượng Nhân Viên: {props.dept.numberOfStaff}</CardText>
-      </CardBody>
-    </Card>
+    <FadeTransform
+      in
+      transformProps={{
+        exitTransform: 'scale(0.2) translateY(30%)',
+      }}
+    >
+      <Card className='mt-3 mb-3'>
+        <CardTitle className='m-2 ml-3'>{props.dept.name}</CardTitle>
+        <CardBody>
+          <CardText>Số Lượng Nhân Viên: {props.dept.numberOfStaff}</CardText>
+        </CardBody>
+      </Card>
+    </FadeTransform>
   );
 }
 

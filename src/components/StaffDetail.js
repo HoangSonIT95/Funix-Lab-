@@ -18,6 +18,7 @@ import {
 import { Control, LocalForm, Errors } from 'react-redux-form';
 import { Link } from 'react-router-dom';
 import dateFormat from 'dateformat';
+import { FadeTransform } from 'react-animation-components';
 
 const required = val => val && val.length;
 const maxLength = len => val => !val || val.length <= len;
@@ -303,10 +304,17 @@ function StaffDetail(props) {
           </div>
         </div>
         <div className='container'>
-          <div className='row'>
-            <RenderImg staff={props.staff} />
-            <RenderDescription staff={props.staff} dept={props.dept} />
-          </div>
+          <FadeTransform
+            in
+            transformProps={{
+              exitTransform: 'scale(0.2) translateY(-50%)',
+            }}
+          >
+            <div className='row'>
+              <RenderImg staff={props.staff} />
+              <RenderDescription staff={props.staff} dept={props.dept} />
+            </div>
+          </FadeTransform>
         </div>
       </div>
     );

@@ -18,23 +18,31 @@ import {
 import { Control, LocalForm, Errors } from 'react-redux-form';
 import { Link } from 'react-router-dom';
 import { Loading } from './Loading';
+import { FadeTransform } from 'react-animation-components';
 
 function RenderStaff({ staff, deleteStaff }) {
   return (
-    <Card className='mt-2'>
-      <CardBody className='border border-success'>
-        <Link to={`/nhanvien/${staff.id}`}>
-          <CardImg src={staff.image} alt={staff.name} />
-          <CardTitle className='text-center mt-1'>{staff.name}</CardTitle>
-        </Link>
-        <Button
-          className='btn btn-danger ml-4'
-          onClick={() => deleteStaff(staff.id)}
-        >
-          Delete
-        </Button>
-      </CardBody>
-    </Card>
+    <FadeTransform
+      in
+      transformProps={{
+        exitTransform: 'scale(0.2) translateY(-50%)',
+      }}
+    >
+      <Card className='mt-2'>
+        <CardBody className='border border-success'>
+          <Link to={`/nhanvien/${staff.id}`}>
+            <CardImg src={staff.image} alt={staff.name} />
+            <CardTitle className='text-center mt-1'>{staff.name}</CardTitle>
+          </Link>
+          <Button
+            className='btn btn-danger ml-4'
+            onClick={() => deleteStaff(staff.id)}
+          >
+            Delete
+          </Button>
+        </CardBody>
+      </Card>
+    </FadeTransform>
   );
 }
 
