@@ -111,7 +111,8 @@ export const deleteStaff = id => dispatch => {
           }
         },
         error => {
-          throw error;
+          var errmess = new Error(error.message + '. Please try again later');
+          throw errmess;
         }
       )
       .then(response => response.json())
@@ -131,6 +132,11 @@ export const updateStaffSuccess = staffs => ({
 export const updateStaff = staff => dispatch => {
   return fetch(baseUrl + 'staffs', {
     method: 'PATCH',
+    body: JSON.stringify(staff),
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    credentials: 'same-origin',
   })
     .then(
       response => {
@@ -145,7 +151,8 @@ export const updateStaff = staff => dispatch => {
         }
       },
       error => {
-        throw error;
+        var errmess = new Error(error.message + '. Please try again later');
+        throw errmess;
       }
     )
     .then(response => response.json())

@@ -8,13 +8,13 @@ import {
   Breadcrumb,
   BreadcrumbItem,
   Button,
-  Form,
   Modal,
   ModalHeader,
   ModalBody,
   FormGroup,
   Label,
   Col,
+  Row,
 } from 'reactstrap';
 import { Control, LocalForm, Errors } from 'react-redux-form';
 import { Link } from 'react-router-dom';
@@ -62,6 +62,7 @@ function StaffDetail(props) {
   }
   const handleUpdateStaff = value => {
     const updateStaff = {
+      id: props.staff.id,
       name: value.name,
       doB: value.doB,
       salaryScale: value.salaryScale,
@@ -77,7 +78,7 @@ function StaffDetail(props) {
     toggleModal();
     props.updateStaff(updateStaff);
   };
-  if (props.staffId) {
+  if (props.staff) {
     return (
       <div className='container'>
         <div className='row'>
@@ -85,11 +86,14 @@ function StaffDetail(props) {
             <BreadcrumbItem>
               <Link to='/nhanvien'>Nhân Viên</Link>
             </BreadcrumbItem>
-            <BreadcrumbItem active>{props.staffId.name}</BreadcrumbItem>
+            <BreadcrumbItem active>{props.staff.name}</BreadcrumbItem>
           </Breadcrumb>
-          <div className='col-12'>
-            <h3>{props.staffId.name}</h3>
-            <Button onClick={toggleModal}>Sửa</Button>
+          <div className='col-12 row mb-3'>
+            <h3 className='col-4'>{props.staff.name}</h3>
+            <Button onClick={toggleModal} className='btn btn-info ml-3'>
+              Sửa
+            </Button>
+            <hr />
             <Modal isOpen={isModalOpen} toggle={toggleModal}>
               <ModalHeader>Cập nhật thông tin nhân viên</ModalHeader>
               <ModalBody>
@@ -104,7 +108,7 @@ function StaffDetail(props) {
                         id='name'
                         name='name'
                         className='form-control'
-                        defaultValue={props.staffId.name}
+                        defaultValue={props.staff.name}
                         validators={{
                           required,
                           minLength: minLength(3),
@@ -133,7 +137,7 @@ function StaffDetail(props) {
                         name='doB'
                         type='date'
                         className='form-control'
-                        defaultValue={props.staffId.doB}
+                        defaultValue={props.staff.doB}
                         validators={{
                           required,
                         }}
@@ -159,7 +163,7 @@ function StaffDetail(props) {
                         name='startDate'
                         type='date'
                         className='form-control'
-                        defaultValue={props.staffId.startDate}
+                        defaultValue={props.staff.startDate}
                         validators={{
                           required,
                         }}
@@ -186,7 +190,7 @@ function StaffDetail(props) {
                         className='form-control'
                         defaultValue={
                           props.dept.find(
-                            dept => dept.id === props.staffId.departmentId
+                            dept => dept.id === props.staff.departmentId
                           ).name
                         }
                         validators={{
@@ -219,7 +223,7 @@ function StaffDetail(props) {
                         id='salaryScale'
                         name='salaryScale'
                         className='form-control'
-                        defaultValue={props.staffId.salaryScale}
+                        defaultValue={props.staff.salaryScale}
                         validators={{
                           required,
                           isNumber,
@@ -246,7 +250,7 @@ function StaffDetail(props) {
                         id='annualLeave'
                         name='annualLeave'
                         className='form-control'
-                        defaultValue={props.staffId.annualLeave}
+                        defaultValue={props.staff.annualLeave}
                         validators={{
                           required,
                           isNumber,
@@ -273,7 +277,7 @@ function StaffDetail(props) {
                         id='overTime'
                         name='overTime'
                         className='form-control'
-                        defaultValue={props.staffId.overTime}
+                        defaultValue={props.staff.overTime}
                         validators={{
                           required,
                           isNumber,
@@ -297,13 +301,12 @@ function StaffDetail(props) {
                 </LocalForm>
               </ModalBody>
             </Modal>
-            <hr />
           </div>
         </div>
         <div className='container'>
           <div className='row'>
-            <RenderImg staff={props.staffId} />
-            <RenderDescription staff={props.staffId} dept={props.dept} />
+            <RenderImg staff={props.staff} />
+            <RenderDescription staff={props.staff} dept={props.dept} />
           </div>
         </div>
       </div>

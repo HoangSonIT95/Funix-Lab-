@@ -42,7 +42,7 @@ class Main extends React.Component {
   StaffWithId = ({ match }) => {
     return (
       <StaffDetail
-        staffId={this.props.staffs.staffs.find(
+        staff={this.props.staffs.staffs.find(
           nv => nv.id === parseInt(match.params.id, 10)
         )}
         dept={this.props.dept.dept}
