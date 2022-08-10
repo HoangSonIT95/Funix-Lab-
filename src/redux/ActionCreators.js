@@ -1,13 +1,14 @@
 import * as ActionTypes from './ActionTypes';
 import { baseUrl } from '../shared/baseUrl';
 
+// thêm nhân viên
 export const addStaff = staffs => ({
   type: ActionTypes.ADD_STAFF,
   payload: staffs,
 });
+
 export const postStaff = staff => dispatch => {
   const newStaff = staff;
-
   return fetch(baseUrl + 'staffs', {
     method: 'POST',
     body: JSON.stringify(newStaff),
@@ -35,11 +36,12 @@ export const postStaff = staff => dispatch => {
     .then(response => response.json())
     .then(response => dispatch(addStaff(response)))
     .catch(error => {
-      console.log('post staff', error.message);
-      alert('Your comment could not be posted\nError: ' + error.message);
+      console.log('add staff', error.message);
+      alert('new staff could not be add\nError: ' + error.message);
     });
 };
 
+// lấy staffs từ api
 export const fetchStaffs = () => dispatch => {
   dispatch(staffsLoading(true));
 
@@ -70,20 +72,91 @@ export const fetchStaffs = () => dispatch => {
     .catch(error => dispatch(staffsFailed(error.message)));
 };
 
+// loading nhân viên
 export const staffsLoading = () => ({
   type: ActionTypes.STAFFS_LOADING,
 });
-
+// báo lỗi fetch api
 export const staffsFailed = errmess => ({
   type: ActionTypes.STAFFS_FAILED,
   payload: errmess,
 });
-
+// fetch api thành công
 export const staffsSuccess = staffs => ({
   type: ActionTypes.STAFFS,
   payload: staffs,
 });
 
+// xoá nhân viên
+export const deleteStaffSuccess = staffs => ({
+  type: ActionTypes.DELETE_STAFF,
+  payload: staffs,
+});
+
+export const deleteStaff = id => dispatch => {
+  if (window.confirm('Are you sure you want to delete this staff?')) {
+    return fetch(baseUrl + `staffs/${id}`, {
+      method: 'DELETE',
+    })
+      .then(
+        response => {
+          if (response.ok) {
+            return response;
+          } else {
+            var error = new Error(
+              'Error ' + response.status + ': ' + response.statusText
+            );
+            error.response = response;
+            throw error;
+          }
+        },
+        error => {
+          throw error;
+        }
+      )
+      .then(response => response.json())
+      .then(response => dispatch(deleteStaffSuccess(response)))
+      .catch(error => {
+        console.log('delete staff', error.message);
+        alert('staff could not be deleted\nError: ' + error.message);
+      });
+  } else return;
+};
+
+export const updateStaffSuccess = staffs => ({
+  type: ActionTypes.UPDATE_STAFF,
+  payload: staffs,
+});
+
+export const updateStaff = staff => dispatch => {
+  return fetch(baseUrl + 'staffs', {
+    method: 'PATCH',
+  })
+    .then(
+      response => {
+        if (response.ok) {
+          return response;
+        } else {
+          var error = new Error(
+            'Error ' + response.status + ': ' + response.statusText
+          );
+          error.response = response;
+          throw error;
+        }
+      },
+      error => {
+        throw error;
+      }
+    )
+    .then(response => response.json())
+    .then(response => dispatch(updateStaffSuccess(response)))
+    .catch(error => {
+      console.log('update staff', error.message);
+      alert('staff could not be updated\nError: ' + error.message);
+    });
+};
+
+// lấy dữ liệu phòng ban từ api
 export const fetchDept = () => dispatch => {
   dispatch(deptLoading(true));
 

@@ -19,15 +19,23 @@ import { Control, LocalForm, Errors } from 'react-redux-form';
 import { Link } from 'react-router-dom';
 import { Loading } from './Loading';
 
-function RenderStaff({ staff }) {
+function RenderStaff({ staff, deleteStaff }) {
   return (
-    <Card className='mt-1'>
-      <Link to={`/nhanvien/${staff.id}`}>
-        <CardBody className='border border-warning'>
+    <Card className='mt-2'>
+      <CardBody className='border border-success'>
+        <Link to={`/nhanvien/${staff.id}`}>
           <CardImg src={staff.image} alt={staff.name} />
-          <CardTitle className='text-center mt-3'>{staff.name}</CardTitle>
-        </CardBody>
-      </Link>
+          <CardTitle className='text-center mt-1'>{staff.name}</CardTitle>
+        </Link>
+        <div className='row'>
+          <Button
+            className='btn btn-danger col-6'
+            onClick={() => deleteStaff(staff.id)}
+          >
+            Delete
+          </Button>
+        </div>
+      </CardBody>
     </Card>
   );
 }
@@ -70,7 +78,7 @@ class StaffList extends React.Component {
         .id,
       annualLeave: value.annualLeave,
       overTime: value.overTime,
-      image: '/assets/images/girl.jpg',
+      image: '/assets/images/alberto.png',
       salary: (value.salaryScale * 3000000 + value.overTime * 200000).toFixed(
         0
       ),
@@ -89,7 +97,7 @@ class StaffList extends React.Component {
       .map(staff => {
         return (
           <div key={staff.id} className='col-lg-2 col-md-4 col-6'>
-            <RenderStaff staff={staff} />
+            <RenderStaff staff={staff} deleteStaff={this.props.deleteStaff} />
           </div>
         );
       });
@@ -293,7 +301,7 @@ class StaffList extends React.Component {
                   </FormGroup>
                   <FormGroup row>
                     <Label htmlFor='overTime' className='col-4'>
-                      Số giờ làm thêm
+                      Số ngày làm thêm
                     </Label>
                     <Col className='col-8 '>
                       <Control.text

@@ -12,6 +12,8 @@ import {
   fetchStaffs,
   fetchDept,
   fetchSalary,
+  deleteStaff,
+  updateStaff,
 } from '../redux/ActionCreators';
 
 // lấy state từ store redux làm props cho Main
@@ -25,6 +27,8 @@ const mapDispatchToProps = dispatch => {
     fetchStaffs: () => dispatch(fetchStaffs()),
     fetchDept: () => dispatch(fetchDept()),
     fetchSalary: () => dispatch(fetchSalary()),
+    deleteStaff: id => dispatch(deleteStaff(id)),
+    updateStaff: staff => dispatch(updateStaff(staff)),
   };
 };
 class Main extends React.Component {
@@ -42,6 +46,7 @@ class Main extends React.Component {
           nv => nv.id === parseInt(match.params.id, 10)
         )}
         dept={this.props.dept.dept}
+        updateStaff={this.props.updateStaff}
       />
     );
   };
@@ -58,7 +63,6 @@ class Main extends React.Component {
   }
 
   render() {
-    console.log(this.props);
     return (
       <div>
         <Header />
@@ -71,6 +75,7 @@ class Main extends React.Component {
                 staffs={this.props.staffs}
                 dept={this.props.dept.dept}
                 postStaff={this.handleAddStaff}
+                deleteStaff={this.props.deleteStaff}
               />
             )}
           />

@@ -5,9 +5,6 @@ export const Staffs = (
   action
 ) => {
   switch (action.type) {
-    case ActionTypes.ADD_STAFF:
-      const staffs = action.payload;
-      return { ...state, staffs };
     case ActionTypes.STAFFS:
       return {
         ...state,
@@ -21,6 +18,13 @@ export const Staffs = (
 
     case ActionTypes.STAFFS_FAILED:
       return { ...state, isLoading: false, errMess: action.payload };
+    case ActionTypes.ADD_STAFF:
+      const staffs = action.payload;
+      return { ...state, staffs };
+    case ActionTypes.DELETE_STAFF:
+      return { ...state, staffs: action.payload };
+    case ActionTypes.UPDATE_STAFF:
+      return { ...state, staffs: action.payload };
     default:
       return state;
   }
