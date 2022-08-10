@@ -15,6 +15,7 @@ import {
   deleteStaff,
   updateStaff,
 } from '../redux/ActionCreators';
+import { TransitionGroup, CSSTransition } from 'react-transition-group';
 
 // lấy state từ store redux làm props cho Main
 const mapStateToProps = state => {
@@ -63,33 +64,42 @@ class Main extends React.Component {
   }
 
   render() {
+    console.log(this.props);
     return (
       <div>
         <Header />
-        <Switch>
-          <Route
-            exact
-            path='/nhanvien'
-            component={() => (
-              <StaffList
-                staffs={this.props.staffs}
-                dept={this.props.dept.dept}
-                postStaff={this.handleAddStaff}
-                deleteStaff={this.props.deleteStaff}
+        <TransitionGroup>
+          <CSSTransition
+            key={this.props.location.key}
+            classNames='page'
+            timeout={100}
+          >
+            <Switch location={this.props.location}>
+              <Route
+                exact
+                path='/nhanvien'
+                component={() => (
+                  <StaffList
+                    staffs={this.props.staffs}
+                    dept={this.props.dept.dept}
+                    postStaff={this.handleAddStaff}
+                    deleteStaff={this.props.deleteStaff}
+                  />
+                )}
               />
-            )}
-          />
-          <Route path='/nhanvien/:id' component={this.StaffWithId} />
-          <Route
-            path='/phongban'
-            component={() => <Dept dept={this.props.dept} />}
-          />
-          <Route
-            path='/bangluong'
-            component={() => <Salary salary={this.props.salary} />}
-          />
-          <Redirect to='/nhanvien' />
-        </Switch>
+              <Route path='/nhanvien/:id' component={this.StaffWithId} />
+              <Route
+                path='/phongban'
+                component={() => <Dept dept={this.props.dept} />}
+              />
+              <Route
+                path='/bangluong'
+                component={() => <Salary salary={this.props.salary} />}
+              />
+              <Redirect to='/nhanvien' />
+            </Switch>
+          </CSSTransition>
+        </TransitionGroup>
         <Footer />
       </div>
     );

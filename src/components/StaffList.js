@@ -27,14 +27,12 @@ function RenderStaff({ staff, deleteStaff }) {
           <CardImg src={staff.image} alt={staff.name} />
           <CardTitle className='text-center mt-1'>{staff.name}</CardTitle>
         </Link>
-        <div className='row'>
-          <Button
-            className='btn btn-danger col-6'
-            onClick={() => deleteStaff(staff.id)}
-          >
-            Delete
-          </Button>
-        </div>
+        <Button
+          className='btn btn-danger ml-4'
+          onClick={() => deleteStaff(staff.id)}
+        >
+          Delete
+        </Button>
       </CardBody>
     </Card>
   );
@@ -123,12 +121,12 @@ class StaffList extends React.Component {
       return (
         <div className='container mt-2'>
           <div className='row mt-2'>
-            <div className='col-lg-5 col-md-4 col-sm-4'>
+            <div className='col-lg-4 col-md-4 col-sm-4'>
               <Breadcrumb>
                 <h6>Danh Sách Nhân Viên</h6>
               </Breadcrumb>
             </div>
-            <div className='col-lg-3 col-md-4 col-sm-4 mb-2'>
+            <div className='col-lg-4 col-md-4 col-sm-4 mb-2'>
               <Button color='primary' onClick={this.toggleModal}>
                 Thêm Nhân Viên
               </Button>
@@ -138,10 +136,10 @@ class StaffList extends React.Component {
               <ModalBody>
                 <LocalForm onSubmit={value => this.handleAddStaff(value)}>
                   <FormGroup row>
-                    <Label htmlFor='name' className='col-4'>
+                    <Label htmlFor='name' className='col-5'>
                       Họ và Tên
                     </Label>
-                    <Col className='col-8 '>
+                    <Col className='col-7 '>
                       <Control.text
                         model='.name'
                         id='name'
@@ -159,16 +157,16 @@ class StaffList extends React.Component {
                         show='touched'
                         messages={{
                           minLength: 'Tên nhân viên phải nhiều hơn 3 kí tự',
-                          maxLength: 'Tên nhân viên phải ít hơn 10 kí tự',
+                          maxLength: 'Tên nhân viên phải ít hơn 30 kí tự',
                         }}
                       />
                     </Col>
                   </FormGroup>
                   <FormGroup row>
-                    <Label htmlFor='doB' className='col-4'>
+                    <Label htmlFor='doB' className='col-5'>
                       Ngày sinh
                     </Label>
-                    <Col className='col-8 '>
+                    <Col className='col-7 '>
                       <Control.text
                         model='.doB'
                         id='doB'
@@ -184,16 +182,16 @@ class StaffList extends React.Component {
                         model='.doB'
                         show='touched'
                         messages={{
-                          required: 'Vui lòng nhập ngày sinh của nhân viên',
+                          required: 'Vui lòng nhập ngày sinh',
                         }}
                       />
                     </Col>
                   </FormGroup>
                   <FormGroup row>
-                    <Label htmlFor='startDate' className='col-4'>
+                    <Label htmlFor='startDate' className='col-5'>
                       Ngày vào công ty
                     </Label>
-                    <Col className='col-8 '>
+                    <Col className='col-7 '>
                       <Control.text
                         model='.startDate'
                         id='startDate'
@@ -215,10 +213,10 @@ class StaffList extends React.Component {
                     </Col>
                   </FormGroup>
                   <FormGroup row>
-                    <Label htmlFor='department' className='col-4'>
+                    <Label htmlFor='department' className='col-5'>
                       Phòng Ban
                     </Label>
-                    <Col className='col-8 '>
+                    <Col className='col-7 '>
                       <Control.select
                         model='.department'
                         id='department'
@@ -246,10 +244,10 @@ class StaffList extends React.Component {
                     </Col>
                   </FormGroup>
                   <FormGroup row>
-                    <Label htmlFor='salaryScale' className='col-4'>
+                    <Label htmlFor='salaryScale' className='col-5'>
                       Hệ số lương
                     </Label>
-                    <Col className='col-8 '>
+                    <Col className='col-7 '>
                       <Control.text
                         model='.salaryScale'
                         id='salaryScale'
@@ -273,10 +271,10 @@ class StaffList extends React.Component {
                     </Col>
                   </FormGroup>
                   <FormGroup row>
-                    <Label htmlFor='annualLeave' className='col-4'>
+                    <Label htmlFor='annualLeave' className='col-5'>
                       Số ngày nghỉ còn lại
                     </Label>
-                    <Col className='col-8 '>
+                    <Col className='col-7 '>
                       <Control.text
                         model='.annualLeave'
                         id='annualLeave'
@@ -300,10 +298,10 @@ class StaffList extends React.Component {
                     </Col>
                   </FormGroup>
                   <FormGroup row>
-                    <Label htmlFor='overTime' className='col-4'>
+                    <Label htmlFor='overTime' className='col-5'>
                       Số ngày làm thêm
                     </Label>
-                    <Col className='col-8 '>
+                    <Col className='col-7 '>
                       <Control.text
                         model='.overTime'
                         id='overTime'

@@ -14,7 +14,6 @@ import {
   FormGroup,
   Label,
   Col,
-  Row,
 } from 'reactstrap';
 import { Control, LocalForm, Errors } from 'react-redux-form';
 import { Link } from 'react-router-dom';
@@ -99,10 +98,10 @@ function StaffDetail(props) {
               <ModalBody>
                 <LocalForm onSubmit={value => handleUpdateStaff(value)}>
                   <FormGroup row>
-                    <Label htmlFor='name' className='col-4'>
+                    <Label htmlFor='name' className='col-5'>
                       Họ và Tên
                     </Label>
-                    <Col className='col-8 '>
+                    <Col className='col-7 '>
                       <Control.text
                         model='.name'
                         id='name'
@@ -121,16 +120,16 @@ function StaffDetail(props) {
                         show='touched'
                         messages={{
                           minLength: 'Tên nhân viên phải nhiều hơn 3 kí tự',
-                          maxLength: 'Tên nhân viên phải ít hơn 10 kí tự',
+                          maxLength: 'Tên nhân viên phải ít hơn 30 kí tự',
                         }}
                       />
                     </Col>
                   </FormGroup>
                   <FormGroup row>
-                    <Label htmlFor='doB' className='col-4'>
+                    <Label htmlFor='doB' className='col-5'>
                       Ngày sinh
                     </Label>
-                    <Col className='col-8 '>
+                    <Col className='col-7 '>
                       <Control.text
                         model='.doB'
                         id='doB'
@@ -153,10 +152,10 @@ function StaffDetail(props) {
                     </Col>
                   </FormGroup>
                   <FormGroup row>
-                    <Label htmlFor='startDate' className='col-4'>
+                    <Label htmlFor='startDate' className='col-5'>
                       Ngày vào công ty
                     </Label>
-                    <Col className='col-8 '>
+                    <Col className='col-7 '>
                       <Control.text
                         model='.startDate'
                         id='startDate'
@@ -179,10 +178,10 @@ function StaffDetail(props) {
                     </Col>
                   </FormGroup>
                   <FormGroup row>
-                    <Label htmlFor='department' className='col-4'>
+                    <Label htmlFor='department' className='col-5'>
                       Phòng Ban
                     </Label>
-                    <Col className='col-8 '>
+                    <Col className='col-7 '>
                       <Control.select
                         model='.department'
                         id='department'
@@ -214,10 +213,10 @@ function StaffDetail(props) {
                     </Col>
                   </FormGroup>
                   <FormGroup row>
-                    <Label htmlFor='salaryScale' className='col-4'>
+                    <Label htmlFor='salaryScale' className='col-5'>
                       Hệ số lương
                     </Label>
-                    <Col className='col-8 '>
+                    <Col className='col-7 '>
                       <Control.text
                         model='.salaryScale'
                         id='salaryScale'
@@ -241,10 +240,10 @@ function StaffDetail(props) {
                     </Col>
                   </FormGroup>
                   <FormGroup row>
-                    <Label htmlFor='annualLeave' className='col-4'>
+                    <Label htmlFor='annualLeave' className='col-5'>
                       Số ngày nghỉ còn lại
                     </Label>
-                    <Col className='col-8 '>
+                    <Col className='col-7 '>
                       <Control.text
                         model='.annualLeave'
                         id='annualLeave'
@@ -268,10 +267,10 @@ function StaffDetail(props) {
                     </Col>
                   </FormGroup>
                   <FormGroup row>
-                    <Label htmlFor='overTime' className='col-4'>
+                    <Label htmlFor='overTime' className='col-5'>
                       Số giờ làm thêm
                     </Label>
-                    <Col className='col-8 '>
+                    <Col className='col-7 '>
                       <Control.text
                         model='.overTime'
                         id='overTime'
