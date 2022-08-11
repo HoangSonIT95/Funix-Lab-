@@ -2,7 +2,7 @@ import React from 'react';
 import { Card, CardText, CardTitle, CardBody } from 'reactstrap';
 import { Loading } from './Loading';
 import { FadeTransform } from 'react-animation-components';
-
+import { Link } from 'react-router-dom';
 function RenderDept(props) {
   return (
     <FadeTransform
@@ -11,12 +11,14 @@ function RenderDept(props) {
         exitTransform: 'scale(0.2) translateY(30%)',
       }}
     >
-      <Card className='mt-3 mb-3'>
-        <CardTitle className='m-2 ml-3'>{props.dept.name}</CardTitle>
-        <CardBody>
-          <CardText>Số Lượng Nhân Viên: {props.dept.numberOfStaff}</CardText>
-        </CardBody>
-      </Card>
+      <Link to={`/phongban/${props.dept.id}`}>
+        <Card className='mt-3 mb-3'>
+          <CardTitle className='m-2 ml-3'>{props.dept.name}</CardTitle>
+          <CardBody>
+            <CardText>Số Lượng Nhân Viên: {props.numOfStaff.length}</CardText>
+          </CardBody>
+        </Card>
+      </Link>
     </FadeTransform>
   );
 }
@@ -44,7 +46,13 @@ const Dept = props => {
       return (
         <div className='col-lg-4 col-md-5' key={dept.id}>
           {/* truyền từng phần tử vào RenderDept để render */}
-          <RenderDept dept={dept} />
+          <RenderDept
+            dept={dept}
+            numOfStaff={props.staffs.filter(
+              staff => staff.departmentId === dept.id
+            )}
+            fetchStaffInDept={props.fetchStaffInDept}
+          />
         </div>
       );
     });

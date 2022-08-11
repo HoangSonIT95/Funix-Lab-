@@ -6,6 +6,7 @@ import Footer from './Footer';
 import StaffList from './StaffList';
 import StaffDetail from './StaffDetail';
 import Dept from './Dept';
+import StaffsInDept from './DeptDetail';
 import Salary from './Salary';
 import {
   postStaff,
@@ -14,12 +15,18 @@ import {
   fetchSalary,
   deleteStaff,
   updateStaff,
+  fetchStaffInDept,
 } from '../redux/ActionCreators';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
 
 // lấy state từ store redux làm props cho Main
 const mapStateToProps = state => {
-  return { staffs: state.staffs, dept: state.dept, salary: state.salary };
+  return {
+    staffs: state.staffs,
+    dept: state.dept,
+    staffsInDept: state.staffsInDept,
+    salary: state.salary,
+  };
 };
 
 const mapDispatchToProps = dispatch => {
@@ -27,6 +34,7 @@ const mapDispatchToProps = dispatch => {
     postStaff: newStaff => dispatch(postStaff(newStaff)),
     fetchStaffs: () => dispatch(fetchStaffs()),
     fetchDept: () => dispatch(fetchDept()),
+    fetchStaffInDept: deptId => dispatch(fetchStaffInDept(deptId)),
     fetchSalary: () => dispatch(fetchSalary()),
     deleteStaff: id => dispatch(deleteStaff(id)),
     updateStaff: staff => dispatch(updateStaff(staff)),
@@ -37,6 +45,7 @@ class Main extends React.Component {
     super(props);
     this.handleAddStaff = this.handleAddStaff.bind(this);
     this.StaffWithId = this.StaffWithId.bind(this);
+    //this.StaffsWithDeptId = this.StaffWithDeptId.bind(this);
   }
 
   // lấy params để truyền vào staffDetail
@@ -48,6 +57,16 @@ class Main extends React.Component {
         )}
         dept={this.props.dept.dept}
         updateStaff={this.props.updateStaff}
+      />
+    );
+  };
+
+  StaffsWithDeptId = ({ match }) => {
+    return (
+      <StaffsInDept
+        deptId={match.params.id}
+        staffsInDept={this.props.staffsInDept}
+        fetchStaffInDept={this.props.fetchStaffInDept}
       />
     );
   };
@@ -88,9 +107,16 @@ class Main extends React.Component {
                 )}
               />
               <Route path='/nhanvien/:id' component={this.StaffWithId} />
+              <Route path='/phongban/:id' component={this.StaffsWithDeptId} />
               <Route
+                exact
                 path='/phongban'
-                component={() => <Dept dept={this.props.dept} />}
+                component={() => (
+                  <Dept
+                    dept={this.props.dept}
+                    staffs={this.props.staffs.staffs}
+                  />
+                )}
               />
               <Route
                 path='/bangluong'
