@@ -9,12 +9,9 @@ import Dept from './Dept';
 import StaffsInDept from './DeptDetail';
 import Salary from './Salary';
 import {
-  postStaff,
   fetchStaffs,
   fetchDept,
   fetchSalary,
-  deleteStaff,
-  updateStaff,
   fetchStaffInDept,
 } from '../redux/ActionCreators';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
@@ -31,13 +28,10 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    postStaff: newStaff => dispatch(postStaff(newStaff)),
     fetchStaffs: () => dispatch(fetchStaffs()),
     fetchDept: () => dispatch(fetchDept()),
     fetchStaffInDept: deptId => dispatch(fetchStaffInDept(deptId)),
     fetchSalary: () => dispatch(fetchSalary()),
-    deleteStaff: id => dispatch(deleteStaff(id)),
-    updateStaff: staff => dispatch(updateStaff(staff)),
   };
 };
 class Main extends React.Component {
@@ -46,7 +40,6 @@ class Main extends React.Component {
     this.state = {
       deptId: '',
     };
-    this.handleAddStaff = this.handleAddStaff.bind(this);
     this.StaffWithId = this.StaffWithId.bind(this);
   }
 
@@ -58,7 +51,6 @@ class Main extends React.Component {
           nv => nv.id === parseInt(match.params.id, 10)
         )}
         dept={this.props.dept.dept}
-        updateStaff={this.props.updateStaff}
       />
     );
   };
@@ -78,12 +70,6 @@ class Main extends React.Component {
     );
   };
 
-  // xử lý thêm nhân viên
-  handleAddStaff = staff => {
-    const id = this.props.staffs.staffs.length;
-    const newStaff = { id, ...staff };
-    this.props.postStaff(newStaff);
-  };
   componentDidMount() {
     this.props.fetchDept();
     this.props.fetchStaffs();
@@ -108,8 +94,6 @@ class Main extends React.Component {
                   <StaffList
                     staffs={this.props.staffs}
                     dept={this.props.dept.dept}
-                    postStaff={this.handleAddStaff}
-                    deleteStaff={this.props.deleteStaff}
                   />
                 )}
               />
