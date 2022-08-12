@@ -83,8 +83,6 @@ function StaffDetail(props) {
     props.updateStaff(updateStaff); // truyền biến vào callback từ props post lên api
   };
   if (props.staff && props.dept.length) {
-    console.log('doB', dateFormat(props.staff.doB, 'dd/mm/yyyy'));
-    console.log('startDate', dateFormat(props.staff.startDate, 'dd/mm/yyyy'));
     return (
       <div className='container'>
         <div className='row'>
@@ -143,7 +141,7 @@ function StaffDetail(props) {
                         name='doB'
                         type='date'
                         className='form-control'
-                        defaultValue={props.staff.doB}
+                        defaultValue={dateFormat(props.staff.doB, 'isoDate')}
                         validators={{
                           required,
                         }}
@@ -169,7 +167,10 @@ function StaffDetail(props) {
                         name='startDate'
                         type='date'
                         className='form-control'
-                        defaultValue={props.staff.startDate}
+                        defaultValue={dateFormat(
+                          props.staff.startDate,
+                          'isoDate'
+                        )}
                         validators={{
                           required,
                         }}
