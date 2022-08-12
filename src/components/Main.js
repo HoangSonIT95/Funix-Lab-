@@ -9,13 +9,11 @@ import Dept from './Dept';
 import StaffsInDept from './DeptDetail';
 import Salary from './Salary';
 import {
-  postStaff,
   fetchStaffs,
   fetchDept,
   fetchSalary,
-  deleteStaff,
-  updateStaff,
   fetchStaffInDept,
+  postStaff,
 } from '../redux/ActionCreators';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
 
@@ -31,13 +29,11 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    postStaff: newStaff => dispatch(postStaff(newStaff)),
     fetchStaffs: () => dispatch(fetchStaffs()),
     fetchDept: () => dispatch(fetchDept()),
     fetchStaffInDept: deptId => dispatch(fetchStaffInDept(deptId)),
     fetchSalary: () => dispatch(fetchSalary()),
-    deleteStaff: id => dispatch(deleteStaff(id)),
-    updateStaff: staff => dispatch(updateStaff(staff)),
+    postStaff: newStaff => dispatch(postStaff(newStaff)),
   };
 };
 class Main extends React.Component {
@@ -58,7 +54,6 @@ class Main extends React.Component {
           nv => nv.id === parseInt(match.params.id, 10)
         )}
         dept={this.props.dept.dept}
-        updateStaff={this.props.updateStaff}
       />
     );
   };
@@ -109,7 +104,6 @@ class Main extends React.Component {
                     staffs={this.props.staffs}
                     dept={this.props.dept.dept}
                     postStaff={this.handleAddStaff}
-                    deleteStaff={this.props.deleteStaff}
                   />
                 )}
               />
