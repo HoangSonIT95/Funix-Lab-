@@ -20,11 +20,13 @@ import { Link } from 'react-router-dom';
 import dateFormat from 'dateformat';
 import { FadeTransform } from 'react-animation-components';
 
-const required = val => val && val.length;
+// điều kiện validate form sửa thông tin
+const required = val => val && val.toString().length;
 const maxLength = len => val => !val || val.length <= len;
 const minLength = len => val => val && val.length >= len;
 const isNumber = val => !isNaN(Number(val));
 
+// render ảnh nhân viên
 function RenderImg({ staff }) {
   return (
     <div className='col-12 col-lg-3 col-md-4 col-sm-12'>
@@ -35,6 +37,7 @@ function RenderImg({ staff }) {
   );
 }
 
+// render thông tin nhân viên
 function RenderDescription({ staff, dept }) {
   return (
     <div className='col-12 col-lg-9 col-md-8 col-sm-12'>
@@ -55,12 +58,13 @@ function RenderDescription({ staff, dept }) {
 }
 
 function StaffDetail(props) {
-  console.log(props);
   const [isModalOpen, setIsModalOpen] = useState(false);
   function toggleModal() {
     setIsModalOpen(!isModalOpen);
   }
+  // xử lý sửa thông tin nhân viên
   const handleUpdateStaff = value => {
+    // lấy dữ liệu từ form đưa vào biến mới
     const updateStaff = {
       id: props.staff.id,
       name: value.name,
@@ -76,9 +80,9 @@ function StaffDetail(props) {
       ),
     };
     toggleModal();
-    props.updateStaff(updateStaff);
+    props.updateStaff(updateStaff); // truyền biến vào callback từ props post lên api
   };
-  if (props.staff) {
+  if (props.staff && props.dept.length) {
     return (
       <div className='container'>
         <div className='row'>

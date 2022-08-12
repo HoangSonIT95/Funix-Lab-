@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Switch, Route, Redirect, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import Header from './Header';
@@ -43,9 +43,11 @@ const mapDispatchToProps = dispatch => {
 class Main extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      deptId: '',
+    };
     this.handleAddStaff = this.handleAddStaff.bind(this);
     this.StaffWithId = this.StaffWithId.bind(this);
-    //this.StaffsWithDeptId = this.StaffWithDeptId.bind(this);
   }
 
   // lấy params để truyền vào staffDetail
@@ -61,29 +63,34 @@ class Main extends React.Component {
     );
   };
 
+  // lấy params để truyền vào staffDetail
   StaffsWithDeptId = ({ match }) => {
+    useEffect(() => {
+      this.props.fetchStaffInDept(match.params.id);
+    }, [match.params.id]);
+
     return (
       <StaffsInDept
         deptId={match.params.id}
         staffsInDept={this.props.staffsInDept}
-        fetchStaffInDept={this.props.fetchStaffInDept}
+        dept={this.props.dept.dept}
       />
     );
   };
 
+  // xử lý thêm nhân viên
   handleAddStaff = staff => {
     const id = this.props.staffs.staffs.length;
     const newStaff = { id, ...staff };
     this.props.postStaff(newStaff);
   };
   componentDidMount() {
-    this.props.fetchStaffs();
     this.props.fetchDept();
+    this.props.fetchStaffs();
     this.props.fetchSalary();
   }
 
   render() {
-    console.log(this.props);
     return (
       <div>
         <Header />

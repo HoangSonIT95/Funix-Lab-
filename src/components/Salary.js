@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from 'react';
+import React, { useState } from 'react';
 import {
   Card,
   CardText,
@@ -15,6 +15,7 @@ import { Link } from 'react-router-dom';
 import { Loading } from './Loading';
 import { FadeTransform } from 'react-animation-components';
 
+// render lương từng nhân viên
 function RenderSalary({ staff }) {
   return (
     <Card className='col-lg-3 col-md-5 m-1'>
@@ -32,11 +33,11 @@ function RenderSalary({ staff }) {
 }
 
 function Salary(props) {
-  console.log(props);
   let staffList = props.salary.salary;
   const [staffs, setStaffs] = useState({
     staffs: staffList,
   });
+  // sắp xếp
   const idDown = () => {
     staffList.sort(function (a, b) {
       return b.id - a.id;
@@ -71,6 +72,7 @@ function Salary(props) {
       staffs: staffList,
     });
   };
+  // hiện loading khi fetch data
   if (props.salary.isLoading) {
     return (
       <div className='container '>
@@ -79,7 +81,9 @@ function Salary(props) {
         </div>
       </div>
     );
-  } else if (props.salary.errMess) {
+  }
+  // hiện lỗi khi fetch data lỗi
+  else if (props.salary.errMess) {
     return (
       <div className='container'>
         <div className='row mt-2'>

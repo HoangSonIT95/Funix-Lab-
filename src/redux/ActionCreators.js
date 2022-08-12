@@ -1,46 +1,6 @@
 import * as ActionTypes from './ActionTypes';
 import { baseUrl } from '../shared/baseUrl';
 
-// thêm nhân viên
-export const addStaff = staffs => ({
-  type: ActionTypes.ADD_STAFF,
-  payload: staffs,
-});
-
-export const postStaff = staff => dispatch => {
-  const newStaff = staff;
-  return fetch(baseUrl + 'staffs', {
-    method: 'POST',
-    body: JSON.stringify(newStaff),
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    credentials: 'same-origin',
-  })
-    .then(
-      response => {
-        if (response.ok) {
-          return response;
-        } else {
-          var error = new Error(
-            'Error ' + response.status + ': ' + response.statusText
-          );
-          error.response = response;
-          throw error;
-        }
-      },
-      error => {
-        throw error;
-      }
-    )
-    .then(response => response.json())
-    .then(response => dispatch(addStaff(response)))
-    .catch(error => {
-      console.log('add staff', error.message);
-      alert('new staff could not be add\nError: ' + error.message);
-    });
-};
-
 // lấy staffs từ api
 export const fetchStaffs = () => dispatch => {
   dispatch(staffsLoading(true));
@@ -86,6 +46,45 @@ export const staffsSuccess = staffs => ({
   type: ActionTypes.STAFFS,
   payload: staffs,
 });
+// thêm nhân viên
+export const addStaff = staffs => ({
+  type: ActionTypes.ADD_STAFF,
+  payload: staffs,
+});
+
+export const postStaff = staff => dispatch => {
+  const newStaff = staff;
+  return fetch(baseUrl + 'staffs', {
+    method: 'POST',
+    body: JSON.stringify(newStaff),
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    credentials: 'same-origin',
+  })
+    .then(
+      response => {
+        if (response.ok) {
+          return response;
+        } else {
+          var error = new Error(
+            'Error ' + response.status + ': ' + response.statusText
+          );
+          error.response = response;
+          throw error;
+        }
+      },
+      error => {
+        throw error;
+      }
+    )
+    .then(response => response.json())
+    .then(response => dispatch(addStaff(response)))
+    .catch(error => {
+      console.log('add staff', error.message);
+      alert('new staff could not be add\nError: ' + error.message);
+    });
+};
 
 // xoá nhân viên
 export const deleteStaffSuccess = staffs => ({
@@ -124,6 +123,7 @@ export const deleteStaff = id => dispatch => {
   } else return;
 };
 
+// cap nhat thong tin nhan vien
 export const updateStaffSuccess = staffs => ({
   type: ActionTypes.UPDATE_STAFF,
   payload: staffs,
@@ -208,6 +208,7 @@ export const deptSuccess = dept => ({
   payload: dept,
 });
 
+// lấy dữ liệu lương từ api
 export const fetchSalary = () => dispatch => {
   dispatch(salaryLoading(true));
 

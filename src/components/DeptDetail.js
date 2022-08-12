@@ -1,16 +1,10 @@
-import React, { useEffect } from 'react';
-import {
-  Card,
-  CardImg,
-  CardBody,
-  CardTitle,
-  Breadcrumb,
-  BreadcrumbItem,
-} from 'reactstrap';
+import React from 'react';
+import { Card, CardImg, CardBody, CardTitle, Breadcrumb } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import { FadeTransform } from 'react-animation-components';
 import { Loading } from './Loading';
 
+// render staff in department
 function RenderStaffInDept({ staffInDept }) {
   return (
     <FadeTransform
@@ -33,11 +27,9 @@ function RenderStaffInDept({ staffInDept }) {
   );
 }
 
+// fetch api data staffs in department
 function StaffsInDept(props) {
-  useEffect(() => {
-    props.fetchStaffInDept(props.deptId); //dispatch action in actioncreator with use dispatch
-  }, []);
-  console.log(props);
+  // hiển thị loading khi fetch data
   if (props.staffsInDept.isLoading) {
     return (
       <div className='container'>
@@ -46,7 +38,9 @@ function StaffsInDept(props) {
         </div>
       </div>
     );
-  } else if (props.staffsInDept.errMess) {
+  }
+  // hiện lỗi khi fetch data lỗi
+  else if (props.staffsInDept.errMess) {
     return (
       <div className='container'>
         <div className='row mt-2'>
@@ -54,7 +48,29 @@ function StaffsInDept(props) {
         </div>
       </div>
     );
-  } else {
+  }
+  // hiện thông báo khi k có nhân viên nào
+  else if (props.staffsInDept.staffsInDept.length === 0) {
+    return (
+      <div className='container'>
+        <div className='row'>
+          <div className='col-12'>
+            <Breadcrumb>
+              <h6>
+                Danh Sách Nhân Viên Trong Phòng Ban{' '}
+                {props.dept.find(dept => dept.id === props.deptId).name}
+              </h6>
+            </Breadcrumb>
+          </div>
+          <h3 style={{ color: 'red' }}>
+            Không có nhân viên nào trong phòng ban
+          </h3>
+        </div>
+      </div>
+    );
+  }
+  // hiện danh sách nhân viên
+  else {
     const staffsInDept = props.staffsInDept.staffsInDept.map(staff => {
       return (
         <div className='col-lg-2 col-md-4 col-6' key={staff.id}>
@@ -64,6 +80,14 @@ function StaffsInDept(props) {
     });
     return (
       <div className='container'>
+        <div className='col-12'>
+          <Breadcrumb>
+            <h6>
+              Danh Sách Nhân Viên Trong Phòng Ban{' '}
+              {props.dept.find(dept => dept.id === props.deptId).name}
+            </h6>
+          </Breadcrumb>
+        </div>
         <div className='row'>{staffsInDept}</div>
       </div>
     );

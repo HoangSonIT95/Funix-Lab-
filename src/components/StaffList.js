@@ -20,6 +20,13 @@ import { Link } from 'react-router-dom';
 import { Loading } from './Loading';
 import { FadeTransform } from 'react-animation-components';
 
+// điều kiện validate form
+const required = val => val && val.length;
+const maxLength = len => val => !val || val.length <= len;
+const minLength = len => val => val && val.length >= len;
+const isNumber = val => !isNaN(Number(val));
+
+// render từng nhân viên ra danh sách
 function RenderStaff({ staff, deleteStaff }) {
   return (
     <FadeTransform
@@ -46,10 +53,6 @@ function RenderStaff({ staff, deleteStaff }) {
   );
 }
 
-const required = val => val && val.length;
-const maxLength = len => val => !val || val.length <= len;
-const minLength = len => val => val && val.length >= len;
-const isNumber = val => !isNaN(Number(val));
 class StaffList extends React.Component {
   constructor(props) {
     super(props);
@@ -62,16 +65,19 @@ class StaffList extends React.Component {
     this.handleAddStaff = this.handleAddStaff.bind(this);
   }
 
+  // tìm kiếm nhân viên
   onSearch = event => {
     event.preventDefault();
     this.setState({ keywords: event.target.searchName.value });
     event.target.searchName.value = '';
   };
 
+  // mở modal thêm nhân viên
   toggleModal() {
     this.setState({ isModalOpen: !this.state.isModalOpen });
   }
 
+  // xử lý thêm nhân viên
   handleAddStaff = value => {
     this.toggleModal();
     // lấy dữ liệu tạo nhân viên mới
@@ -89,9 +95,10 @@ class StaffList extends React.Component {
         0
       ),
     };
-    // thêm nhân viên mới vào hàm onAdd callback
+    // thêm nhân viên mới vào hàm onAdd callback từ props
     this.props.postStaff(newStaff);
   };
+
   // map từng phần tử từ props để render
   staffList = staffs =>
     staffs
@@ -109,6 +116,7 @@ class StaffList extends React.Component {
       });
 
   render() {
+    // hiển thị loading khi fetch data
     if (this.props.staffs.isLoading) {
       return (
         <div className='container'>
@@ -117,7 +125,9 @@ class StaffList extends React.Component {
           </div>
         </div>
       );
-    } else if (this.props.staffs.errMess) {
+    }
+    // thông báo lỗi khi fetch data lỗi
+    else if (this.props.staffs.errMess) {
       return (
         <div className='container'>
           <div className='row mt-2'>
@@ -125,7 +135,9 @@ class StaffList extends React.Component {
           </div>
         </div>
       );
-    } else
+    }
+    // render data
+    else
       return (
         <div className='container mt-2'>
           <div className='row mt-2'>

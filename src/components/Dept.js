@@ -3,6 +3,8 @@ import { Card, CardText, CardTitle, CardBody } from 'reactstrap';
 import { Loading } from './Loading';
 import { FadeTransform } from 'react-animation-components';
 import { Link } from 'react-router-dom';
+
+// render từng phòng ban
 function RenderDept(props) {
   return (
     <FadeTransform
@@ -23,7 +25,9 @@ function RenderDept(props) {
   );
 }
 
+// nhận dữ liệu từ props fetch api
 const Dept = props => {
+  // hiển thị loading khi fetch data
   if (props.dept.isLoading) {
     return (
       <div className='container '>
@@ -32,7 +36,9 @@ const Dept = props => {
         </div>
       </div>
     );
-  } else if (props.dept.errMess) {
+  }
+  // hiện lỗi khi fetch data lỗi
+  else if (props.dept.errMess) {
     return (
       <div className='container'>
         <div className='row mt-2'>
@@ -51,7 +57,6 @@ const Dept = props => {
             numOfStaff={props.staffs.filter(
               staff => staff.departmentId === dept.id
             )}
-            fetchStaffInDept={props.fetchStaffInDept}
           />
         </div>
       );
