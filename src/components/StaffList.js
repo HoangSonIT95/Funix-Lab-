@@ -41,6 +41,12 @@ function RenderStaff({ staff, deleteStaff }) {
             <CardImg src={staff.image} alt={staff.name} />
             <CardTitle className='text-center mt-1'>{staff.name}</CardTitle>
           </Link>
+          <Button
+            className='btn btn-danger ml-4'
+            onClick={() => deleteStaff(staff.id)}
+          >
+            Delete
+          </Button>
         </CardBody>
       </Card>
     </FadeTransform>

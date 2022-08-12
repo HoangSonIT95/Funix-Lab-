@@ -125,6 +125,42 @@ export const updateStaff = staff => dispatch => {
       alert('staff could not be updated\nError: ' + error.message);
     });
 };
+// xoá nhân viên
+export const deleteStaffSuccess = staffs => ({
+  type: ActionTypes.DELETE_STAFF,
+  payload: staffs,
+});
+
+export const deleteStaff = id => dispatch => {
+  if (window.confirm('Are you sure you want to delete this staff?')) {
+    return fetch(baseUrl + `staffs/${id}`, {
+      method: 'DELETE',
+    })
+      .then(
+        response => {
+          if (response.ok) {
+            return response;
+          } else {
+            var error = new Error(
+              'Error ' + response.status + ': ' + response.statusText
+            );
+            error.response = response;
+            throw error;
+          }
+        },
+        error => {
+          var errmess = new Error(error.message + '. Please try again later');
+          throw errmess;
+        }
+      )
+      .then(response => response.json())
+      .then(response => dispatch(deleteStaffSuccess(response)))
+      .catch(error => {
+        console.log('delete staff', error.message);
+        alert('staff could not be deleted\nError: ' + error.message);
+      });
+  } else return;
+};
 
 // lấy dữ liệu phòng ban từ api
 export const fetchDept = () => dispatch => {

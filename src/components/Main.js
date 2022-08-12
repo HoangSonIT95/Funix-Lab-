@@ -13,6 +13,7 @@ import {
   fetchStaffs,
   fetchDept,
   fetchSalary,
+  deleteStaff,
   updateStaff,
   fetchStaffInDept,
 } from '../redux/ActionCreators';
@@ -35,6 +36,7 @@ const mapDispatchToProps = dispatch => {
     fetchDept: () => dispatch(fetchDept()),
     fetchStaffInDept: deptId => dispatch(fetchStaffInDept(deptId)),
     fetchSalary: () => dispatch(fetchSalary()),
+    deleteStaff: id => dispatch(deleteStaff(id)),
     updateStaff: staff => dispatch(updateStaff(staff)),
   };
 };
@@ -107,6 +109,7 @@ class Main extends React.Component {
                     staffs={this.props.staffs}
                     dept={this.props.dept.dept}
                     postStaff={this.handleAddStaff}
+                    deleteStaff={this.props.deleteStaff}
                   />
                 )}
               />
