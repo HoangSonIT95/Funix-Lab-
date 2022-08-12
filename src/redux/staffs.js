@@ -21,6 +21,8 @@ export const Staffs = (
     case ActionTypes.ADD_STAFF:
       const staffs = action.payload;
       return { ...state, staffs };
+    case ActionTypes.UPDATE_STAFF:
+      return { ...state, staffs: action.payload };
     default:
       return state;
   }

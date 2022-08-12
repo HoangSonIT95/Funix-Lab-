@@ -7608,10 +7608,10 @@
     "popper.js" "^1.14.1"
     "prop-types" "^15.6.1"
 
-"react-redux-form@1.16.8":
-  "integrity" "sha512-qx+3IP+uOsj7rPWKsRH4W8r+TXb4ohfEl/s083X9sbtDA75tyscGmglxkdFSrM/L32l4z139U4aW3avUtx5QFg=="
-  "resolved" "https://registry.npmjs.org/react-redux-form/-/react-redux-form-1.16.8.tgz"
-  "version" "1.16.8"
+"react-redux-form@1.16.14":
+  "integrity" "sha512-exd8FoWwJRQynjnYqCLmcbwcqgRPyU+qiKmTA7/T8qlNgyqgmbAgkYNe9NG9FYb5oLgHAtx5vDhVEpje888lIA=="
+  "resolved" "https://registry.npmjs.org/react-redux-form/-/react-redux-form-1.16.14.tgz"
+  "version" "1.16.14"
   dependencies:
     "icepick" "^1.1.0"
     "invariant" "~2.2.1"
@@ -7621,7 +7621,7 @@
     "react-native-segmented-control-tab" "^3.2.1"
     "shallow-compare" "^1.2.1"
 
-"react-redux@^4.0.0 || ^5.0.3", "react-redux@5.0.7":
+"react-redux@^4.0.0 || ^5.0.3 || ^7.0.0", "react-redux@5.0.7":
   "integrity" "sha512-5VI8EV5hdgNgyjfmWzBbdrqUkrVRKlyTKk1sGH3jzM2M2Mhj/seQgPXaz6gVAj2lz/nz688AdTqMO18Lr24Zhg=="
   "resolved" "https://registry.npmjs.org/react-redux/-/react-redux-5.0.7.tgz"
   "version" "5.0.7"
@@ -7861,7 +7861,7 @@
   "resolved" "https://registry.npmjs.org/redux-thunk/-/redux-thunk-2.2.0.tgz"
   "version" "2.2.0"
 
-"redux@^2.0.0 || ^3.0.0 || ^4.0.0-0", "redux@^3.0.0", "redux@3.7.2":
+"redux@^2.0.0 || ^3.0.0 || ^4.0.0-0", "redux@^3.0.0 || ^4.0.0", "redux@3.7.2":
   "integrity" "sha512-pNqnf9q1hI5HHZRBkj3bAngGZW/JMCmexDlOxw4XagXY2o1327nHH54LoTjiPJ0gizoqPDRqWyX/00g0hD6w+A=="
   "resolved" "https://registry.npmjs.org/redux/-/redux-3.7.2.tgz"
   "version" "3.7.2"

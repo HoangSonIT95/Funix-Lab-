@@ -86,6 +86,46 @@ export const postStaff = staff => dispatch => {
     });
 };
 
+// cap nhat thong tin nhan vien
+export const updateStaffSuccess = staffs => ({
+  type: ActionTypes.UPDATE_STAFF,
+  payload: staffs,
+});
+
+export const updateStaff = staff => dispatch => {
+  return fetch(baseUrl + 'staffs', {
+    method: 'PATCH',
+    body: JSON.stringify(staff),
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    credentials: 'same-origin',
+  })
+    .then(
+      response => {
+        if (response.ok) {
+          return response;
+        } else {
+          var error = new Error(
+            'Error ' + response.status + ': ' + response.statusText
+          );
+          error.response = response;
+          throw error;
+        }
+      },
+      error => {
+        var errmess = new Error(error.message + '. Please try again later');
+        throw errmess;
+      }
+    )
+    .then(response => response.json())
+    .then(response => dispatch(updateStaffSuccess(response)))
+    .catch(error => {
+      console.log('update staff', error.message);
+      alert('staff could not be updated\nError: ' + error.message);
+    });
+};
+
 // lấy dữ liệu phòng ban từ api
 export const fetchDept = () => dispatch => {
   dispatch(deptLoading(true));
