@@ -1,5 +1,4 @@
 import React from 'react';
-import dateFormat from 'dateformat';
 import {
   Card,
   CardImg,
@@ -16,7 +15,7 @@ import {
   Col,
   Row,
 } from 'reactstrap';
-import { Control, LocalForm, Errors } from 'react-redux-form';
+import { Control, LocalForm } from 'react-redux-form';
 import { Link } from 'react-router-dom';
 import { Loading } from './LoadingComponent';
 import { baseUrl } from '../shared/baseUrl';
