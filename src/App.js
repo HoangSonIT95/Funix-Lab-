@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import { Navbar, NavbarBrand } from 'reactstrap';
+import './App.css';
 import Menu from './components/MenuComponent';
 import { DISHES } from './shared/dishes';
-import './App.css';
 class App extends Component {
   constructor(props) {
     super(props);
+    // lấy dữ liệu làm state
     this.state = {
       dishes: DISHES,
     };
@@ -19,7 +20,8 @@ class App extends Component {
             <NavbarBrand href='/'>Ristorante Con Fusion</NavbarBrand>
           </div>
         </Navbar>
-        <Menu dishes={this.state.dishes} />
+        <Menu dishes={this.state.dishes} />{' '}
+        {/* truyền state làm props cho Menu xử lý render */}
       </div>
     );
   }
