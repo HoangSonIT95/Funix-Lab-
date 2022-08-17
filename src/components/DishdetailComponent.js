@@ -3,6 +3,7 @@ import { Card, CardImg, CardText, CardBody, CardTitle } from 'reactstrap';
 import dateFormat from 'dateformat';
 
 export default class DishDetail extends Component {
+  // render chi tiết món ăn
   renderDish(dish) {
     if (dish != null) {
       return (
@@ -18,7 +19,7 @@ export default class DishDetail extends Component {
       );
     } else return <div></div>;
   }
-
+  // render bình luận món ăn
   renderComments(dish) {
     if (dish != null) {
       const comment = dish.comments.map(comment => {

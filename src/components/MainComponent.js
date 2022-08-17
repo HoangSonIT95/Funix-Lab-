@@ -13,6 +13,7 @@ class Main extends Component {
     };
   }
 
+  // lấy id của món ăn khi click vào
   onDishSelect(dishId) {
     this.setState({ selectedDish: dishId });
   }
@@ -27,11 +28,11 @@ class Main extends Component {
         </Navbar>
         <Menu
           dishes={this.state.dishes}
-          onClick={dishId => this.onDishSelect(dishId)}
+          onClick={dishId => this.onDishSelect(dishId)} //lấy id món ăn từ Menu component khi click vào món ăn
         />
         <DishDetail
           dish={this.state.dishes.find(
-            dish => dish.id === this.state.selectedDish
+            dish => dish.id === this.state.selectedDish // lọc món ăn có id trùng với id khi click vào món ăn
           )}
         />
       </div>
