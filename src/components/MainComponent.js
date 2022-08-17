@@ -4,6 +4,8 @@ import Menu from './MenuComponent';
 import DishDetail from './DishdetailComponent';
 import { DISHES } from '../shared/dishes';
 
+import Header from './HeaderComponent';
+import Footer from './FooterComponent';
 class Main extends Component {
   constructor(props) {
     super(props);
@@ -20,11 +22,7 @@ class Main extends Component {
   render() {
     return (
       <div>
-        <Navbar dark color='primary'>
-          <div className='container'>
-            <NavbarBrand href='/'>Ristorante Con Fusion</NavbarBrand>
-          </div>
-        </Navbar>
+        <Header />
         <Menu
           dishes={this.state.dishes}
           onClick={dishId => this.onDishSelect(dishId)} //lấy id món ăn từ Menu component khi click vào món ăn
@@ -34,6 +32,7 @@ class Main extends Component {
             dish => dish.id === this.state.selectedDish // lọc món ăn có id trùng với id khi click vào món ăn
           )}
         />
+        <Footer />
       </div>
     );
   }
