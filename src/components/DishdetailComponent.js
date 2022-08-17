@@ -1,6 +1,16 @@
 import React from 'react';
-import { Card, CardImg, CardText, CardBody, CardTitle } from 'reactstrap';
 import dateFormat from 'dateformat';
+
+import {
+  Card,
+  CardImg,
+  CardText,
+  CardBody,
+  CardTitle,
+  Breadcrumb,
+  BreadcrumbItem,
+} from 'reactstrap';
+import { Link } from 'react-router-dom';
 
 // render chi tiết món ăn
 function RenderDish({ dish }) {
@@ -22,7 +32,7 @@ function RenderDish({ dish }) {
 // render bình luận món ăn
 function RenderComments({ comments }) {
   if (comments != null) {
-    const comment = comments.comments.map(comment => {
+    const comment = comments.map(comment => {
       return (
         <div className='m-4'>
           <CardText>{comment.comment}</CardText>
@@ -43,12 +53,23 @@ function RenderComments({ comments }) {
 
 // nhận món ăn từ Main component sau khi lấy được id thì lọc món ăn trùng id
 const DishDetail = props => {
-  console.log(props.dish);
   return (
     <div className='container'>
       <div className='row'>
+        <Breadcrumb>
+          <BreadcrumbItem>
+            <Link to='/menu'>Menu</Link>
+          </BreadcrumbItem>
+          <BreadcrumbItem active>{props.dish.name}</BreadcrumbItem>
+        </Breadcrumb>
+        <div className='col-12'>
+          <h3>{props.dish.name}</h3>
+          <hr />
+        </div>
+      </div>
+      <div className='row'>
         <RenderDish dish={props.dish} />
-        <RenderComments comments={props.dish} />
+        <RenderComments comments={props.comments} />
       </div>
     </div>
   );
