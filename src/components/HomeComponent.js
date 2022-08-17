@@ -15,14 +15,14 @@ function RenderCard({ item }) {
       <CardBody>
         <CardTitle>{item.name}</CardTitle>
         {item.designation ? (
-          <CardSubtitle>{item.designation}</CardSubtitle>
+          <CardSubtitle>{item.designation}</CardSubtitle> // nếu props item có designation thì return designation
         ) : null}
         <CardText>{item.description}</CardText>
       </CardBody>
     </Card>
   );
 }
-
+// nhận props từ Main để render
 function Home(props) {
   return (
     <div className='container'>

@@ -14,6 +14,7 @@ import { LEADERS } from '../shared/leaders';
 class Main extends Component {
   constructor(props) {
     super(props);
+    // lấy dữ liệu từ folder shared để làm state
     this.state = {
       dishes: DISHES,
       comments: COMMENTS,
@@ -25,6 +26,7 @@ class Main extends Component {
   render() {
     const HomePage = () => {
       return (
+        // lọc dữ liệu từ state có featured == true
         <Home
           dish={this.state.dishes.filter(dish => dish.featured)[0]}
           promotion={this.state.promotions.filter(promo => promo.featured)[0]}
@@ -32,6 +34,7 @@ class Main extends Component {
         />
       );
     };
+
     return (
       <div>
         <Header />
