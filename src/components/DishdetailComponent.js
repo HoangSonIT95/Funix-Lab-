@@ -2,6 +2,7 @@ import React from 'react';
 import { Card, CardImg, CardText, CardBody, CardTitle } from 'reactstrap';
 import dateFormat from 'dateformat';
 
+// render chi tiết món ăn
 function RenderDish({ dish }) {
   if (dish != null) {
     return (
@@ -18,6 +19,7 @@ function RenderDish({ dish }) {
   } else return <div></div>;
 }
 
+// render bình luận món ăn
 function RenderComments({ comments }) {
   if (comments != null) {
     const comment = comments.comments.map(comment => {
@@ -39,6 +41,7 @@ function RenderComments({ comments }) {
   } else return <div></div>;
 }
 
+// nhận món ăn từ Main component sau khi lấy được id thì lọc món ăn trùng id
 const DishDetail = props => {
   console.log(props.dish);
   return (
